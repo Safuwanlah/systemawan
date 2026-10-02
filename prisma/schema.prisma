@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String // Akan menyimpan hashed password
+  role      Role     @default(STAFF)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions StockTransaction[]
+}
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  spareparts Sparepart[]
+}
+
+model Brand {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  spareparts Sparepart[]
+}
+
+model Sparepart {
+  id          String  @id @default(uuid())
+  code        String  @unique // SKU / Kode unik barang
+  name        String
+  description String?
+  price       Int     @default(0) // Harga barang
+  minStock    Int     @default(5) // Batas stok minimum
+  stock       Int     @default(0) // Stok saat ini (terkalkulasi/cached dari transaksi)
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  brandId String?
+  brand   Brand?  @relation(fields: [brandId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  transactions StockTransaction[]
+}
+
+model StockTransaction {
+  id       String          @id @default(uuid())
+  type     TransactionType
+  quantity Int // Jumlah barang (selalu positif)
+  notes    String? // Keterangan (misal: "Barang retur", "Restock bulanan")
+
+  sparepartId String
+  sparepart   Sparepart @relation(fields: [sparepartId], references: [id], onDelete: Restrict)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum TransactionType {
+  IN
+  OUT
+}

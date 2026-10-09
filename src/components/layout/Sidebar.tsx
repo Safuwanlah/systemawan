@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { 
   LayoutDashboard, 
   Users, 
@@ -82,14 +83,21 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
                 href={item.path}
                 onClick={(e) => handleNavClick(e, item.path)}
                 title={!isSidebarOpen ? item.name : ''}
-                className={`flex items-center py-3 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
+                className={`relative flex items-center py-3 rounded-xl text-[14px] font-medium transition-colors duration-200 group z-10 ${
                   isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
                 } ${
                   isActive 
-                    ? 'bg-[#3867FF] text-white shadow-[0_4px_12px_rgba(56,103,255,0.25)]' 
-                    : 'text-[#858BA8] hover:bg-[#151832] hover:text-[#F5F7FF]'
+                    ? 'text-white' 
+                    : 'text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832]'
                 }`}
               >
+                {isActive && (
+                  <motion.div
+                    layoutId="sidebar-active-indicator"
+                    className="absolute inset-0 bg-[#3867FF] rounded-xl shadow-[0_4px_12px_rgba(56,103,255,0.25)] -z-10"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
                 <item.icon className={`w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-white' : 'text-[#858BA8] group-hover:text-[#F5F7FF]'}`} />
                 <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
                   isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'

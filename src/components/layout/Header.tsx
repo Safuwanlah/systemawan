@@ -15,10 +15,10 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: HeaderProps)
     <header className="h-[72px] px-4 md:px-8 bg-[#080A1F] border-b border-[#252946] flex items-center justify-between sticky top-0 z-40">
       
       <div className="flex items-center gap-4">
-        {/* Mobile Sidebar Toggle */}
+        {/* Mobile & Desktop Sidebar Toggle */}
         <button 
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden p-2 rounded-xl text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832] transition-all duration-200"
+          className={`p-2 rounded-xl text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832] transition-all duration-200 ${isSidebarOpen ? 'lg:hidden' : ''}`}
         >
           <Menu className="w-5 h-5" />
         </button>

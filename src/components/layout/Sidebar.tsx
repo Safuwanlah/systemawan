@@ -48,15 +48,15 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
   return (
     <>
       <aside 
-        className={`fixed lg:relative h-full bg-[#11142B] border-r border-[#252946] flex flex-col shrink-0 transition-[width,transform] ease-in-out duration-300 z-50 ${
-          isSidebarOpen ? 'w-[260px] translate-x-0' : 'w-[84px] -translate-x-full lg:translate-x-0'
+        className={`fixed lg:relative h-full bg-[#11142B] border-[#252946] flex flex-col shrink-0 transition-[width,transform,border-width] ease-in-out duration-300 z-50 ${
+          isSidebarOpen ? 'w-[260px] translate-x-0 border-r' : 'w-0 -translate-x-full lg:translate-x-0 border-r-0 overflow-hidden'
         }`}
       >
         {/* Brand & Toggle */}
         <div className={`h-[72px] flex items-center border-b border-[#252946] overflow-hidden shrink-0 transition-all duration-300 ${
           isSidebarOpen ? 'px-5 justify-start' : 'px-0 justify-center'
         }`}>
-          <div className="flex items-center gap-3">
+          <div className={`flex items-center transition-all duration-300 ${isSidebarOpen ? 'gap-3' : 'gap-0'}`}>
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 rounded-xl text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832] transition-all duration-200 shrink-0"
@@ -64,16 +64,16 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
             >
               <Menu className="w-6 h-6" />
             </button>
-            <span className={`font-bold text-[#F5F7FF] text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
-              isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
-            }`}>
-              System Awan
-            </span>
+            {isSidebarOpen && (
+              <span className={`font-bold text-[#F5F7FF] text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out opacity-100 translate-x-0 max-w-[150px]`}>
+                System Awan
+              </span>
+            )}
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto overflow-x-hidden">
+        <nav className={`flex-1 py-6 px-4 space-y-1.5 overflow-y-auto overflow-x-hidden ${!isSidebarOpen ? 'hidden' : ''}`}>
           {menuItems.map((item) => {
             // Using precise path matching or starting path for active state
             const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path + '/'));
@@ -110,7 +110,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         </nav>
 
         {/* Logout Action */}
-        <div className="p-4 border-t border-[#252946] shrink-0">
+        <div className={`p-4 border-t border-[#252946] shrink-0 ${!isSidebarOpen ? 'hidden' : ''}`}>
           <button
             onClick={() => setIsLogoutModalOpen(true)}
             title={!isSidebarOpen ? "Logout" : ""}

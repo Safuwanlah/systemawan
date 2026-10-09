@@ -64,7 +64,7 @@ export default function RevenueChart() {
               cursor={{ stroke: '#3867FF', strokeWidth: 1, strokeDasharray: '4 4' }}
               contentStyle={{ backgroundColor: '#11142B', borderColor: '#252946', color: '#F5F7FF', borderRadius: '8px', fontSize: '13px' }}
               itemStyle={{ color: '#3867FF', fontWeight: 'bold' }}
-              formatter={(value: number) => [`$${value}M`, 'Revenue']}
+              formatter={(value: any) => [`$${value}M`, 'Revenue']}
             />
             <Area 
               type="monotone" 

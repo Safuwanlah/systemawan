@@ -28,6 +28,9 @@ export default function CategoryChart({ data }: { data: { name: string, value: n
             paddingAngle={5}
             dataKey="value"
             stroke="none"
+            isAnimationActive={true}
+            animationDuration={1500}
+            animationEasing="ease-out"
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

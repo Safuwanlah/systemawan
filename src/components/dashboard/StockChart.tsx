@@ -36,7 +36,15 @@ export default function StockChart({ data }: { data: any[] }) {
             contentStyle={{ backgroundColor: '#171A1D', borderColor: '#25292D', color: '#fff', borderRadius: '12px', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)' }}
             itemStyle={{ color: '#3B82F6', fontWeight: 'bold' }}
           />
-          <Bar dataKey="stock" fill="url(#colorStock)" radius={[6, 6, 0, 0]} barSize={36} animationDuration={1500} />
+          <Bar 
+            dataKey="stock" 
+            fill="url(#colorStock)" 
+            radius={[6, 6, 0, 0]} 
+            barSize={36} 
+            isAnimationActive={true}
+            animationDuration={1500} 
+            animationEasing="ease-out"
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

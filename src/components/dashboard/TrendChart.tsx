@@ -67,14 +67,17 @@ export default function TrendChart() {
             itemStyle={{ color: '#3B82F6', fontWeight: 'bold' }}
           />
           <Area 
-            type="monotone" 
+            type="natural" 
             dataKey="value" 
             stroke="#3B82F6" 
-            strokeWidth={3}
+            strokeWidth={4}
             fillOpacity={1} 
             fill="url(#colorValue)" 
-            activeDot={{ r: 6, fill: '#3B82F6', stroke: '#171A1D', strokeWidth: 2 }}
+            activeDot={{ r: 6, fill: '#3B82F6', stroke: '#171A1D', strokeWidth: 3 }}
             style={{ filter: 'url(#glow)' }}
+            isAnimationActive={true}
+            animationDuration={1500}
+            animationEasing="ease-out"
           />
         </AreaChart>
       </ResponsiveContainer>

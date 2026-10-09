@@ -63,7 +63,10 @@ export default function OrdersChart() {
               dataKey="value" 
               fill="#3867FF" 
               radius={[2, 2, 0, 0]} 
-              barSize={12} 
+              barSize={12}
+              isAnimationActive={true}
+              animationDuration={1500}
+              animationEasing="ease-out"
             />
           </BarChart>
         </ResponsiveContainer>

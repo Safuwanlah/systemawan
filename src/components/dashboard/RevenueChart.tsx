@@ -67,13 +67,16 @@ export default function RevenueChart() {
               formatter={(value: any) => [`$${value}M`, 'Revenue']}
             />
             <Area 
-              type="monotone" 
+              type="natural" 
               dataKey="value" 
               stroke="#3867FF" 
-              strokeWidth={3}
+              strokeWidth={4}
               fillOpacity={1} 
               fill="url(#colorValue)" 
-              activeDot={{ r: 5, fill: '#3867FF', stroke: '#151832', strokeWidth: 2 }}
+              activeDot={{ r: 6, fill: '#3867FF', stroke: '#151832', strokeWidth: 3 }}
+              isAnimationActive={true}
+              animationDuration={1500}
+              animationEasing="ease-out"
             />
           </AreaChart>
         </ResponsiveContainer>

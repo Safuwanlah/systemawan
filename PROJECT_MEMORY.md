@@ -18,11 +18,11 @@
 
 **Domain:** Inventory Sparepart
 
-**Project Status:** MVP COMPLETED
+**Project Status:** ONLINE / DEPLOYED
 
-**Current Phase:** Phase 7 — Testing / Polish
+**Current Phase:** Phase 8 — Deployment Completed
 
-**Deployment Target:** Vercel
+**Deployment Target:** Vercel + Neon (PostgreSQL)
 
 ---
 
@@ -199,33 +199,37 @@ Status: DONE
 Status: DONE
 
 ## Phase 7 — Testing
-Status: IN PROGRESS
+Status: DONE
 Tasks:
 * [x] TypeScript check
-* [ ] Lint
-* [ ] Build
+* [x] Lint
+* [x] Build
 * [x] API testing (manual)
 * [x] CRUD testing (manual)
 * [x] UI testing (manual)
 
 ## Phase 8 — Deployment
-Status: NOT STARTED
+Status: DONE
+Tasks:
+* [x] Inisialisasi Git dan Push ke GitHub.
+* [x] Integrasi GitHub dengan Vercel.
+* [x] Setup Cloud Database (Neon) untuk Production.
+* [x] Deploy Production di Vercel sukses tanpa error (`vercel --prod`).
 
 ---
 
 # 13. CURRENT TASK
 
-**Task:** Menyelesaikan semua antarmuka web (Goal).
+**Task:** Maintenance dan evaluasi deployment awal.
 
-**Status:** COMPLETED
+**Status:** IDLE
 
 ---
 
 # 14. NEXT TASK
 
-1. Testing menyeluruh dan bug fixing.
-2. Deployment ke Vercel jika diinginkan.
-3. Menambahkan Authentication (NextAuth / sejenisnya).
+1. Testing menyeluruh dan bug fixing di environment production Vercel.
+2. Menambahkan Authentication (NextAuth / sejenisnya).
 
 ---
 
@@ -288,6 +292,17 @@ Tailwind CSS v4 dengan `next-themes`.
 ---
 
 # 22. CHANGE LOG
+
+## 2026-10-07
+* Membuat dan menghubungkan database online menggunakan Neon (PostgreSQL).
+* Menambahkan `DATABASE_URL` ke Environment Variables di Vercel.
+* Memperbaiki Framework Preset di Vercel menjadi Next.js.
+* Berhasil melakukan deployment (Full-Stack) ke Vercel menggunakan Vercel CLI (`vercel --prod --force`).
+
+## 2026-10-02
+* Inisialisasi Git dan push codebase ke repository GitHub (`systemawan`).
+* Memperbaiki error PowerShell Execution Policy agar `npm run dev` dapat berjalan lokal.
+* Menghubungkan project GitHub ke Vercel untuk deployment.
 
 ## 2026-09-25
 * Project System Awan dibuat.

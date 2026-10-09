@@ -1,8 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Box, Truck, FileText, Wrench, Menu, ChevronLeft, ChevronRight } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { 
+  LayoutDashboard, 
+  Users, 
+  Box, 
+  ShoppingCart, 
+  UserCircle, 
+  BarChart2, 
+  FileText, 
+  Settings, 
+  LogOut,
+  Menu,
+  Wrench
+} from 'lucide-react';
+import { useState } from 'react';
+import LogoutModal from '@/components/ui/LogoutModal';
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -11,78 +25,102 @@ interface SidebarProps {
 
 export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
     { name: 'Stok Sparepart', icon: Box, path: '/sparepart' },
-    { name: 'Supplier', icon: Truck, path: '/supplier' },
+    { name: 'Data Supplier', icon: Users, path: '/supplier' },
+    { name: 'Transaksi', icon: ShoppingCart, path: '/transaksi' },
     { name: 'Laporan', icon: FileText, path: '/laporan' },
+    { name: 'Pengaturan', icon: Settings, path: '/settings' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    // Always close sidebar on mobile when a link is clicked
+    if (window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
+    }
+  };
+
   return (
-    <aside 
-      className={`h-screen bg-[#0F1113] border-r border-[#25292D] flex flex-col shrink-0 transition-[width] ease-in-out duration-300 relative z-50 ${
-        isSidebarOpen ? 'w-[260px]' : 'w-[84px]'
-      }`}
-    >
-      {/* Brand & Toggle */}
-      <div className="h-[72px] px-5 flex items-center justify-between border-b border-[#25292D] overflow-hidden">
-        <div className={`flex items-center gap-3 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#E53935] to-[#B71C1C] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(229,57,53,0.4)]">
-            <Wrench className="w-4 h-4 text-white" />
-          </div>
-          <span className="font-bold text-white text-[15px] tracking-widest">GARASI</span>
-        </div>
-        
-        <button 
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className={`p-2 rounded-xl text-[#8A9098] hover:text-white hover:bg-[#1C2024] transition-all duration-200 shrink-0 ${!isSidebarOpen && 'mx-auto'}`}
-          title="Toggle Sidebar"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 py-8 px-4 space-y-2 overflow-hidden">
-        {menuItems.map((item) => {
-          const isActive = pathname === item.path || pathname.startsWith(item.path + '/');
-          return (
-            <Link
-              key={item.name}
-              href={item.path}
-              title={!isSidebarOpen ? item.name : ''}
-              className={`flex items-center gap-3.5 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
-                isSidebarOpen ? 'px-4' : 'px-0 justify-center'
-              } ${
-                isActive 
-                  ? 'bg-gradient-to-r from-[#1C2024] to-[#131517] text-white shadow-sm border border-[#2B3036]/50' 
-                  : 'text-[#8A9098] hover:bg-[#1C2024]/40 hover:text-white border border-transparent'
-              }`}
+    <>
+      <aside 
+        className={`fixed lg:relative h-full bg-[#11142B] border-r border-[#252946] flex flex-col shrink-0 transition-[width,transform] ease-in-out duration-300 z-50 ${
+          isSidebarOpen ? 'w-[260px] translate-x-0' : 'w-[84px] -translate-x-full lg:translate-x-0'
+        }`}
+      >
+        {/* Brand & Toggle */}
+        <div className={`h-[72px] flex items-center border-b border-[#252946] overflow-hidden shrink-0 transition-all duration-300 ${
+          isSidebarOpen ? 'px-5 justify-start' : 'px-0 justify-center'
+        }`}>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 rounded-xl text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832] transition-all duration-200 shrink-0"
+              title="Toggle Sidebar"
             >
-              <item.icon className={`w-5 h-5 shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-[#E53935]' : 'text-[#5A6068] group-hover:text-[#A7ADB4]'}`} />
-              <span className={`whitespace-nowrap transition-all duration-300 ease-in-out ${
-                isSidebarOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 hidden'
-              }`}>
-                {item.name}
-              </span>
-            </Link>
-          );
-        })}
-      </nav>
-
-      {/* Footer / User minimal info */}
-      <div className={`p-4 border-t border-[#25292D] transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 hidden'}`}>
-        <div className="flex items-center gap-3 px-2">
-          <div className="w-8 h-8 rounded-full bg-[#1C2024] flex items-center justify-center shrink-0 border border-[#2B3036]">
-            <span className="text-white text-xs font-bold">N</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xs font-medium text-white">System Awan</span>
-            <span className="text-[10px] text-[#5A6068]">v2.0.1</span>
+              <Menu className="w-6 h-6" />
+            </button>
+            <span className={`font-bold text-[#F5F7FF] text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
+              isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
+            }`}>
+              System Awan
+            </span>
           </div>
         </div>
-      </div>
-    </aside>
+
+        {/* Navigation */}
+        <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto overflow-x-hidden">
+          {menuItems.map((item) => {
+            // Using precise path matching or starting path for active state
+            const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path + '/'));
+            return (
+              <Link
+                key={item.name}
+                href={item.path}
+                onClick={(e) => handleNavClick(e, item.path)}
+                title={!isSidebarOpen ? item.name : ''}
+                className={`flex items-center py-3 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
+                  isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
+                } ${
+                  isActive 
+                    ? 'bg-[#3867FF] text-white shadow-[0_4px_12px_rgba(56,103,255,0.25)]' 
+                    : 'text-[#858BA8] hover:bg-[#151832] hover:text-[#F5F7FF]'
+                }`}
+              >
+                <item.icon className={`w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-white' : 'text-[#858BA8] group-hover:text-[#F5F7FF]'}`} />
+                <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
+                  isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
+                }`}>
+                  {item.name}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Logout Action */}
+        <div className="p-4 border-t border-[#252946] shrink-0">
+          <button
+            onClick={() => setIsLogoutModalOpen(true)}
+            title={!isSidebarOpen ? "Logout" : ""}
+            className={`w-full flex items-center py-3 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
+              isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
+            } text-[#858BA8] hover:bg-[#FF4D67]/10 hover:text-[#FF4D67]`}
+          >
+            <LogOut className="w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110" />
+            <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
+              isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
+            }`}>
+              Logout
+            </span>
+          </button>
+        </div>
+      </aside>
+
+      <LogoutModal isOpen={isLogoutModalOpen} onClose={() => setIsLogoutModalOpen(false)} />
+    </>
   );
 }

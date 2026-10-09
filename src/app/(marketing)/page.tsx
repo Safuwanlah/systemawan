@@ -9,10 +9,16 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login and redirect to dashboard
-    router.push('/dashboard');
+    if (username === 'admin' && password === 'admin123') {
+      router.push('/dashboard');
+    } else {
+      alert('Username atau password salah!');
+    }
   };
 
   return (
@@ -59,8 +65,10 @@ export default function LoginPage() {
                 <input
                   type="text"
                   required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="block w-full pl-10 pr-4 py-3 bg-[#0F1113] border border-[#25292D] rounded-lg text-white placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
-                  placeholder="Contoh: budi@garasi.id"
+                  placeholder="Contoh: admin"
                 />
               </div>
             </div>
@@ -75,6 +83,8 @@ export default function LoginPage() {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-10 pr-10 py-3 bg-[#0F1113] border border-[#25292D] rounded-lg text-white placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
                   placeholder="••••••••"
                 />
@@ -107,15 +117,7 @@ export default function LoginPage() {
             </div>
           </form>
 
-          {/* Register Link */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-[#5A6068]">
-              Belum punya akun?{' '}
-              <Link href="/register" className="font-medium text-[#A7ADB4] hover:text-white transition-colors">
-                Daftar di sini
-              </Link>
-            </p>
-          </div>
+
         </div>
 
       </main>

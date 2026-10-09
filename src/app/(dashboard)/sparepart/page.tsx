@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useGlobalContext, Sparepart } from '@/context/GlobalContext';
 import { Search, Plus, Package, Edit, Trash2, AlertTriangle, X, Eye, ChevronRight } from 'lucide-react';
+import StaggerItem from '@/components/dashboard/StaggerItem';
 
 export default function SparepartPage() {
   const { spareparts, suppliers, addSparepart, updateSparepart, deleteSparepart } = useGlobalContext();
@@ -80,116 +81,122 @@ export default function SparepartPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in">
-      {/* BREADCRUMB */}
-      <div className="flex items-center text-sm text-[#A7ADB4]">
-        <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
-        <ChevronRight className="w-4 h-4 mx-2" />
-        <span className="text-[#F5F5F5] font-medium">Manajemen Sparepart</span>
-      </div>
-
-      {/* HEADER */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-[#F5F5F5]">Manajemen Sparepart</h1>
-          <p className="text-[#A7ADB4] text-sm mt-1">Kelola seluruh master data sparepart yang digunakan dalam inventory bengkel.</p>
+    <div className="space-y-6">
+      <StaggerItem>
+        {/* BREADCRUMB */}
+        <div className="flex items-center text-sm text-[#A7ADB4] mb-4">
+          <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <span className="text-[#F5F5F5] font-medium">Manajemen Sparepart</span>
         </div>
-        <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all shadow-[0_0_15px_rgba(229,57,53,0.3)]">
-          <Plus className="w-5 h-5" />
-          Tambah Sparepart
-        </button>
-      </div>
+
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-[#F5F5F5]">Manajemen Sparepart</h1>
+            <p className="text-[#A7ADB4] text-sm mt-1">Kelola seluruh master data sparepart yang digunakan dalam inventory bengkel.</p>
+          </div>
+          <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all shadow-[0_0_15px_rgba(229,57,53,0.3)]">
+            <Plus className="w-5 h-5" />
+            Tambah Sparepart
+          </button>
+        </div>
+      </StaggerItem>
 
       {/* STATS */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg">
-          <p className="text-xs font-medium text-[#A7ADB4] mb-1">Total Sparepart</p>
-          <p className="text-2xl font-black text-white">{stats.total}</p>
-        </div>
-        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg">
-          <p className="text-xs font-medium text-[#A7ADB4] mb-1">Kategori</p>
-          <p className="text-2xl font-black text-white">{stats.categories}</p>
-        </div>
-        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg">
-          <p className="text-xs font-medium text-[#A7ADB4] mb-1">Merek</p>
-          <p className="text-2xl font-black text-white">{stats.mereks}</p>
-        </div>
-        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg">
-          <p className="text-xs font-medium text-[#A7ADB4] mb-1">Sparepart Aktif</p>
-          <p className="text-2xl font-black text-[#22C55E]">{stats.active}</p>
-        </div>
+        <StaggerItem>
+          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Total Sparepart</p>
+            <p className="text-2xl font-black text-white">{stats.total}</p>
+          </div>
+        </StaggerItem>
+        <StaggerItem>
+          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Kategori</p>
+            <p className="text-2xl font-black text-white">{stats.categories}</p>
+          </div>
+        </StaggerItem>
+        <StaggerItem>
+          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Merek</p>
+            <p className="text-2xl font-black text-white">{stats.mereks}</p>
+          </div>
+        </StaggerItem>
+        <StaggerItem>
+          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Sparepart Aktif</p>
+            <p className="text-2xl font-black text-[#22C55E]">{stats.active}</p>
+          </div>
+        </StaggerItem>
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-xl overflow-hidden">
-        <div className="p-4 border-b border-[#292D32] flex flex-col md:flex-row gap-4 justify-between items-center bg-[#0F1113]">
-          <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A7ADB4]" />
-            <input 
-              type="text" 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari kode atau nama sparepart..." 
-              className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
-            />
-          </div>
-          <div className="flex gap-3 w-full md:w-auto">
-            <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
-              {categories.map(c => <option key={c} value={c}>Kategori: {c}</option>)}
-            </select>
-            <select value={merekFilter} onChange={e => setMerekFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
-              {mereks.map(m => <option key={m} value={m}>Merek: {m}</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto">
-          {filteredSpareparts.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16">
-              <Package className="w-16 h-16 text-[#292D32] mb-4" />
-              <p className="text-white font-bold text-lg mb-1">Belum ada data</p>
-              <p className="text-[#A7ADB4] text-sm mb-4">Belum ada sparepart yang terdaftar.</p>
-              <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-[#25292D] text-white text-sm rounded-md hover:bg-[#292D32]">+ Tambah Sparepart</button>
+      <StaggerItem>
+        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-xl overflow-hidden">
+          <div className="p-4 border-b border-[#292D32] flex flex-col md:flex-row gap-4 justify-between items-center bg-[#0F1113]">
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A7ADB4]" />
+              <input 
+                type="text" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Cari kode atau nama sparepart..." 
+                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
+              />
             </div>
-          ) : (
-            <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-[#0F1113] border-b border-[#292D32] text-[#A7ADB4]">
-                <tr>
-                  <th className="px-6 py-4 font-bold">KODE</th>
-                  <th className="px-6 py-4 font-bold">NAMA SPAREPART</th>
-                  <th className="px-6 py-4 font-bold">MEREK</th>
-                  <th className="px-6 py-4 font-bold">KATEGORI</th>
-                  <th className="px-6 py-4 font-bold text-right">HARGA BELI</th>
-                  <th className="px-6 py-4 font-bold text-right">HARGA JUAL</th>
-                  <th className="px-6 py-4 font-bold text-center">STOK MIN</th>
-                  <th className="px-6 py-4 font-bold text-center">LOKASI</th>
-                  <th className="px-6 py-4 font-bold text-right">AKSI</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#292D32]">
-                {filteredSpareparts.map(sp => (
-                  <tr key={sp.id} className="hover:bg-[#25292D]/30 transition-colors group">
-                    <td className="px-6 py-4 font-medium text-[#F5F5F5]">{sp.code}</td>
-                    <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
-                    <td className="px-6 py-4 text-[#A7ADB4]">{sp.merek}</td>
-                    <td className="px-6 py-4"><span className="px-2.5 py-1 bg-[#25292D] text-[#A7ADB4] rounded text-xs">{sp.category}</span></td>
-                    <td className="px-6 py-4 text-right text-[#A7ADB4]">Rp {sp.hargaBeli.toLocaleString('id-ID')}</td>
-                    <td className="px-6 py-4 text-right text-[#F5F5F5] font-medium">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
-                    <td className="px-6 py-4 text-center text-[#A7ADB4]">{sp.minStock} {sp.unit}</td>
-                    <td className="px-6 py-4 text-center text-[#A7ADB4]">{sp.location}</td>
-                    <td className="px-6 py-4 text-right">
-                      <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => openEditModal(sp)} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
-                        <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
-                      </div>
-                    </td>
+            <div className="flex gap-3 w-full md:w-auto">
+              <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
+                {categories.map(c => <option key={c} value={c}>Kategori: {c}</option>)}
+              </select>
+              <select value={merekFilter} onChange={e => setMerekFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
+                {mereks.map(m => <option key={m} value={m}>Merek: {m}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            {filteredSpareparts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-16">
+                <Package className="w-16 h-16 text-[#292D32] mb-4" />
+                <p className="text-white font-bold text-lg mb-1">Belum ada data</p>
+                <p className="text-[#A7ADB4] text-sm mb-4">Belum ada sparepart yang terdaftar.</p>
+                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-[#25292D] text-white text-sm rounded-md hover:bg-[#292D32]">+ Tambah Sparepart</button>
+              </div>
+            ) : (
+              <table className="w-full text-left text-sm whitespace-nowrap">
+                <thead className="bg-[#0F1113] border-b border-[#292D32] text-[#A7ADB4]">
+                  <tr>
+                    <th className="px-6 py-4 font-bold">NAMA SPAREPART</th>
+                    <th className="px-6 py-4 font-bold">MEREK</th>
+                    <th className="px-6 py-4 font-bold text-right">HARGA BELI</th>
+                    <th className="px-6 py-4 font-bold text-right">HARGA JUAL</th>
+                    <th className="px-6 py-4 font-bold text-center">STOK MIN</th>
+                    <th className="px-6 py-4 font-bold text-right">AKSI</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+                </thead>
+                <tbody className="divide-y divide-[#292D32]">
+                  {filteredSpareparts.map(sp => (
+                    <tr key={sp.id} className="hover:bg-[#25292D]/30 transition-colors group">
+                      <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                      <td className="px-6 py-4 text-[#A7ADB4]">{sp.merek}</td>
+                      <td className="px-6 py-4 text-right text-[#A7ADB4]">Rp {sp.hargaBeli.toLocaleString('id-ID')}</td>
+                      <td className="px-6 py-4 text-right text-[#F5F5F5] font-medium">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
+                      <td className="px-6 py-4 text-center text-[#A7ADB4]">{sp.minStock} {sp.unit}</td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex justify-end gap-2">
+                          <button onClick={() => openEditModal(sp)} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
+                          <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
-      </div>
+      </StaggerItem>
 
       {/* FORM MODAL */}
       {isModalOpen && (

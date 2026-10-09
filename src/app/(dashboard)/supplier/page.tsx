@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalContext } from '@/context/GlobalContext';
 import { Search, Plus, Truck, Edit, Trash2, AlertTriangle, X, Eye, ChevronRight } from 'lucide-react';
 import StaggerItem from '@/components/dashboard/StaggerItem';
@@ -50,7 +51,7 @@ export default function SupplierPage() {
             <h1 className="text-2xl font-bold text-[#F5F5F5]">Supplier</h1>
             <p className="text-[#A7ADB4] text-sm mt-1">Kelola data supplier dan hubungan pembelian sparepart.</p>
           </div>
-          <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all shadow-[0_0_15px_rgba(229,57,53,0.3)]">
+          <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#080A1F] focus:ring-[#E53935]">
             <Plus className="w-5 h-5" />
             Tambah Supplier
           </button>
@@ -90,7 +91,7 @@ export default function SupplierPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari kode, nama, atau kontak..." 
-                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
+                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all"
               />
             </div>
             <div className="flex gap-2 p-1 bg-[#0F1113] border border-[#292D32] rounded-lg">
@@ -131,31 +132,41 @@ export default function SupplierPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#292D32]">
-                  {filteredSuppliers.map(sp => {
-                    const itemsCount = spareparts.filter(s => s.supplierId === sp.id).length;
-                    return (
-                      <tr key={sp.id} className="hover:bg-[#25292D]/30 transition-colors group">
-                        <td className="px-6 py-4 font-medium text-[#F5F5F5]">{sp.code}</td>
-                        <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
-                        <td className="px-6 py-4 text-[#A7ADB4]">{sp.contact}</td>
-                        <td className="px-6 py-4 text-[#A7ADB4]">{sp.phone}</td>
-                        <td className="px-6 py-4 text-[#A7ADB4]">{sp.email}</td>
-                        <td className="px-6 py-4 text-center font-bold text-white">{itemsCount}</td>
-                        <td className="px-6 py-4 text-center">
-                          <span className={`px-2.5 py-1 text-xs font-bold rounded ${sp.status === 'Aktif' ? 'bg-[#22C55E]/10 text-[#22C55E]' : 'bg-[#EF4444]/10 text-[#EF4444]'}`}>
-                            {sp.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button className="p-1.5 text-[#A7ADB4] hover:text-white bg-[#25292D] rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
-                            <button onClick={() => { setEditingData(sp); setIsModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
-                            <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                  <AnimatePresence mode="popLayout">
+                    {filteredSuppliers.map(sp => {
+                      const itemsCount = spareparts.filter(s => s.supplierId === sp.id).length;
+                      return (
+                        <motion.tr 
+                          layout
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          key={sp.id} 
+                          className="hover:bg-[#25292D]/30 transition-colors group"
+                        >
+                          <td className="px-6 py-4 font-medium text-[#F5F5F5]">{sp.code}</td>
+                          <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.contact}</td>
+                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.phone}</td>
+                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.email}</td>
+                          <td className="px-6 py-4 text-center font-bold text-white">{itemsCount}</td>
+                          <td className="px-6 py-4 text-center">
+                            <span className={`px-2.5 py-1 text-xs font-bold rounded ${sp.status === 'Aktif' ? 'bg-[#22C55E]/10 text-[#22C55E]' : 'bg-[#EF4444]/10 text-[#EF4444]'}`}>
+                              {sp.status}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <button className="p-1.5 text-[#A7ADB4] hover:text-white bg-[#25292D] rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
+                              <button onClick={() => { setEditingData(sp); setIsModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
+                              <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
+                            </div>
+                          </td>
+                        </motion.tr>
+                      );
+                    })}
+                  </AnimatePresence>
                 </tbody>
               </table>
             )}
@@ -164,47 +175,63 @@ export default function SupplierPage() {
       </StaggerItem>
 
       {/* FORM MODAL */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-[#0F1113]/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95">
-            <div className="px-6 py-4 border-b border-[#292D32] flex justify-between items-center bg-[#0F1113]">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Truck className="w-5 h-5 text-[#E53935]" />
-                {editingData ? 'Edit Supplier' : 'Tambah Supplier'}
-              </h2>
-              <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-[#A7ADB4] hover:text-white"><X className="w-5 h-5"/></button>
-            </div>
-            <form onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); setEditingData(null); alert('Supplier disimpan (demo)'); }} className="p-6">
-              <div className="space-y-4 mb-4">
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kode Supplier *</label>
-                  <input type="text" defaultValue={editingData?.code} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white outline-none focus:border-[#E53935]" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Nama Supplier *</label>
-                  <input type="text" defaultValue={editingData?.name} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white outline-none focus:border-[#E53935]" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kontak Person *</label>
-                  <input type="text" defaultValue={editingData?.contact} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white outline-none focus:border-[#E53935]" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Telepon *</label>
-                  <input type="text" defaultValue={editingData?.phone} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white outline-none focus:border-[#E53935]" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Email *</label>
-                  <input type="email" defaultValue={editingData?.email} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white outline-none focus:border-[#E53935]" />
-                </div>
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-[#080A1F]/80 backdrop-blur-sm"
+              onClick={() => { setIsModalOpen(false); setEditingData(null); }}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+              className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-lg overflow-hidden relative z-10"
+            >
+              <div className="px-6 py-4 border-b border-[#292D32] flex justify-between items-center bg-[#0F1113]">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Truck className="w-5 h-5 text-[#E53935]" />
+                  {editingData ? 'Edit Supplier' : 'Tambah Supplier'}
+                </h2>
+                <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-[#A7ADB4] hover:text-white transition-colors p-1 hover:bg-[#25292D] rounded-md"><X className="w-5 h-5"/></button>
               </div>
-              <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-[#292D32]">
-                <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-[#A7ADB4] hover:text-white font-medium">Batal</button>
-                <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-colors">Simpan Data</button>
-              </div>
-            </form>
+              <form onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); setEditingData(null); alert('Supplier disimpan (demo)'); }} className="p-6">
+                <div className="space-y-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kode Supplier *</label>
+                    <input type="text" defaultValue={editingData?.code} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Nama Supplier *</label>
+                    <input type="text" defaultValue={editingData?.name} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kontak Person *</label>
+                    <input type="text" defaultValue={editingData?.contact} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Telepon *</label>
+                    <input type="text" defaultValue={editingData?.phone} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Email *</label>
+                    <input type="email" defaultValue={editingData?.email} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                </div>
+                <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-[#292D32]">
+                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-[#A7ADB4] hover:text-white font-medium transition-colors hover:bg-[#25292D] rounded-lg">Batal</button>
+                  <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>
+                </div>
+              </form>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }

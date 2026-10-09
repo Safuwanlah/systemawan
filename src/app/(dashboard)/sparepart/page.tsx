@@ -180,21 +180,31 @@ export default function SparepartPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#292D32]">
-                  {filteredSpareparts.map(sp => (
-                    <tr key={sp.id} className="hover:bg-[#25292D]/30 transition-colors group">
-                      <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
-                      <td className="px-6 py-4 text-[#A7ADB4]">{sp.merek}</td>
-                      <td className="px-6 py-4 text-right text-[#A7ADB4]">Rp {sp.hargaBeli.toLocaleString('id-ID')}</td>
-                      <td className="px-6 py-4 text-right text-[#F5F5F5] font-medium">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
-                      <td className="px-6 py-4 text-center text-[#A7ADB4]">{sp.minStock} {sp.unit}</td>
-                      <td className="px-6 py-4 text-right">
-                        <div className="flex justify-end gap-2">
-                          <button onClick={() => openEditModal(sp)} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
-                          <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                  <AnimatePresence mode="popLayout">
+                    {filteredSpareparts.map(sp => (
+                      <motion.tr 
+                        layout
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        key={sp.id} 
+                        className="hover:bg-[#25292D]/30 transition-colors group"
+                      >
+                        <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                        <td className="px-6 py-4 text-[#A7ADB4]">{sp.merek}</td>
+                        <td className="px-6 py-4 text-right text-[#A7ADB4]">Rp {sp.hargaBeli.toLocaleString('id-ID')}</td>
+                        <td className="px-6 py-4 text-right text-[#F5F5F5] font-medium">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
+                        <td className="px-6 py-4 text-center text-[#A7ADB4]">{sp.minStock} {sp.unit}</td>
+                        <td className="px-6 py-4 text-right">
+                          <div className="flex justify-end gap-2">
+                            <button onClick={() => openEditModal(sp)} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
+                            <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
+                          </div>
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </AnimatePresence>
                 </tbody>
               </table>
             )}

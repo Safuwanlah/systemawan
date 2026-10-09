@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalContext, Sparepart } from '@/context/GlobalContext';
 import { Search, Plus, Package, Edit, Trash2, AlertTriangle, X, Eye, ChevronRight } from 'lucide-react';
 import StaggerItem from '@/components/dashboard/StaggerItem';
@@ -99,7 +100,7 @@ export default function SparepartPage() {
             <h1 className="text-2xl font-bold text-[#F5F5F5]">Manajemen Sparepart</h1>
             <p className="text-[#A7ADB4] text-sm mt-1">Kelola seluruh master data sparepart yang digunakan dalam inventory bengkel.</p>
           </div>
-          <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all shadow-[0_0_15px_rgba(229,57,53,0.3)]">
+          <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#080A1F] focus:ring-[#E53935]">
             <Plus className="w-5 h-5" />
             Tambah Sparepart
           </button>
@@ -145,14 +146,14 @@ export default function SparepartPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari kode atau nama sparepart..." 
-                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
+                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all"
               />
             </div>
             <div className="flex gap-3 w-full md:w-auto">
-              <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
+              <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
                 {categories.map(c => <option key={c} value={c}>Kategori: {c}</option>)}
               </select>
-              <select value={merekFilter} onChange={e => setMerekFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 outline-none focus:border-[#E53935]">
+              <select value={merekFilter} onChange={e => setMerekFilter(e.target.value)} className="bg-[#171A1D] border border-[#292D32] text-[#A7ADB4] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
                 {mereks.map(m => <option key={m} value={m}>Merek: {m}</option>)}
               </select>
             </div>
@@ -202,87 +203,119 @@ export default function SparepartPage() {
       </StaggerItem>
 
       {/* FORM MODAL */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-[#0F1113]/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in zoom-in-95">
-            <div className="px-6 py-4 border-b border-[#292D32] flex justify-between items-center bg-[#0F1113]">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                <Package className="w-5 h-5 text-[#E53935]" />
-                {editingData ? 'Edit Sparepart' : 'Tambah Sparepart Baru'}
-              </h2>
-              <button onClick={closeModal} className="text-[#A7ADB4] hover:text-white"><X className="w-5 h-5"/></button>
-            </div>
-            <form onSubmit={handleSubmit} className="p-6">
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kode Sparepart *</label>
-                  <input type="text" name="code" defaultValue={editingData?.code} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Nama Sparepart *</label>
-                  <input type="text" name="name" defaultValue={editingData?.name} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Merek *</label>
-                  <input type="text" name="merek" defaultValue={editingData?.merek} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kategori *</label>
-                  <input type="text" name="category" defaultValue={editingData?.category} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Satuan *</label>
-                  <input type="text" name="unit" defaultValue={editingData?.unit} required placeholder="pcs, set, botol" className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Lokasi Rak *</label>
-                  <input type="text" name="location" defaultValue={editingData?.location} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Harga Beli *</label>
-                  <input type="number" name="hargaBeli" defaultValue={editingData?.hargaBeli} min="0" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Harga Jual *</label>
-                  <input type="number" name="hargaJual" defaultValue={editingData?.hargaJual} min="0" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Stok Minimum *</label>
-                  <input type="number" name="minStock" defaultValue={editingData?.minStock} min="1" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Supplier Utama *</label>
-                  <select name="supplierId" defaultValue={editingData?.supplierId || ""} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:border-[#E53935] outline-none">
-                    <option value="" disabled>Pilih Supplier...</option>
-                    {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                  </select>
-                </div>
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-[#080A1F]/80 backdrop-blur-sm"
+              onClick={closeModal}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+              className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden relative z-10"
+            >
+              <div className="px-6 py-4 border-b border-[#292D32] flex justify-between items-center bg-[#0F1113]">
+                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Package className="w-5 h-5 text-[#E53935]" />
+                  {editingData ? 'Edit Sparepart' : 'Tambah Sparepart Baru'}
+                </h2>
+                <button onClick={closeModal} className="text-[#A7ADB4] hover:text-white transition-colors p-1 hover:bg-[#25292D] rounded-md"><X className="w-5 h-5"/></button>
               </div>
-              <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-[#292D32]">
-                <button type="button" onClick={closeModal} className="px-4 py-2 text-[#A7ADB4] hover:text-white font-medium">Batal</button>
-                <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-colors shadow-lg shadow-[#E53935]/20">Simpan Data</button>
-              </div>
-            </form>
+              <form onSubmit={handleSubmit} className="p-6">
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kode Sparepart *</label>
+                    <input type="text" name="code" defaultValue={editingData?.code} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Nama Sparepart *</label>
+                    <input type="text" name="name" defaultValue={editingData?.name} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Merek *</label>
+                    <input type="text" name="merek" defaultValue={editingData?.merek} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kategori *</label>
+                    <input type="text" name="category" defaultValue={editingData?.category} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Satuan *</label>
+                    <input type="text" name="unit" defaultValue={editingData?.unit} required placeholder="pcs, set, botol" className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Lokasi Rak *</label>
+                    <input type="text" name="location" defaultValue={editingData?.location} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Harga Beli *</label>
+                    <input type="number" name="hargaBeli" defaultValue={editingData?.hargaBeli} min="0" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Harga Jual *</label>
+                    <input type="number" name="hargaJual" defaultValue={editingData?.hargaJual} min="0" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Stok Minimum *</label>
+                    <input type="number" name="minStock" defaultValue={editingData?.minStock} min="1" required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Supplier Utama *</label>
+                    <select name="supplierId" defaultValue={editingData?.supplierId || ""} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
+                      <option value="" disabled>Pilih Supplier...</option>
+                      {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-[#292D32]">
+                  <button type="button" onClick={closeModal} className="px-4 py-2 text-[#A7ADB4] hover:text-white font-medium transition-colors hover:bg-[#25292D] rounded-lg">Batal</button>
+                  <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>
+                </div>
+              </form>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* DELETE CONFIRMATION MODAL */}
-      {isDeleteModalOpen && (
-        <div className="fixed inset-0 bg-[#0F1113]/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-in fade-in">
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 p-6 text-center">
-            <div className="w-16 h-16 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="w-8 h-8 text-[#EF4444]" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">Hapus Sparepart?</h3>
-            <p className="text-[#A7ADB4] mb-6">Apakah Anda yakin ingin menghapus data sparepart ini? Tindakan ini tidak dapat dibatalkan.</p>
-            <div className="flex gap-3 justify-center">
-              <button onClick={() => setIsDeleteModalOpen(false)} className="px-6 py-2 bg-[#25292D] text-white rounded-lg hover:bg-[#292D32] font-medium transition-colors">Batal</button>
-              <button onClick={confirmDelete} className="px-6 py-2 bg-[#EF4444] text-white rounded-lg hover:bg-[#DC2626] font-bold transition-colors">Ya, Hapus</button>
-            </div>
+      <AnimatePresence>
+        {isDeleteModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-[#080A1F]/80 backdrop-blur-sm"
+              onClick={() => setIsDeleteModalOpen(false)}
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+              className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-md overflow-hidden p-6 text-center relative z-10"
+            >
+              <div className="w-16 h-16 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center mx-auto mb-4">
+                <AlertTriangle className="w-8 h-8 text-[#EF4444]" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Hapus Sparepart?</h3>
+              <p className="text-[#A7ADB4] mb-6">Apakah Anda yakin ingin menghapus data sparepart ini? Tindakan ini tidak dapat dibatalkan.</p>
+              <div className="flex gap-3 justify-center">
+                <button onClick={() => setIsDeleteModalOpen(false)} className="px-6 py-2 bg-[#25292D] text-white rounded-lg hover:bg-[#292D32] font-medium transition-colors">Batal</button>
+                <button onClick={confirmDelete} className="px-6 py-2 bg-[#EF4444] text-white rounded-lg hover:bg-[#DC2626] font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#EF4444]">Ya, Hapus</button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* NOTIFICATION TOAST */}
       {notification && (

@@ -16,6 +16,7 @@ export default function SparepartPage() {
   const [editingData, setEditingData] = useState<Sparepart | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [notification, setNotification] = useState<string | null>(null);
 
   const categories = ['Semua', ...Array.from(new Set(spareparts.map(s => s.category)))];
   const mereks = ['Semua', ...Array.from(new Set(spareparts.map(s => s.merek)))];
@@ -77,6 +78,8 @@ export default function SparepartPage() {
       deleteSparepart(selectedId);
       setIsDeleteModalOpen(false);
       setSelectedId(null);
+      setNotification('Sparepart berhasil dihapus!');
+      setTimeout(() => setNotification(null), 3000);
     }
   };
 
@@ -278,6 +281,19 @@ export default function SparepartPage() {
               <button onClick={confirmDelete} className="px-6 py-2 bg-[#EF4444] text-white rounded-lg hover:bg-[#DC2626] font-bold transition-colors">Ya, Hapus</button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* NOTIFICATION TOAST */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 bg-[#22C55E] text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3 animate-in slide-in-from-bottom-5 fade-in duration-300 z-[200]">
+          <div className="bg-white/20 p-1.5 rounded-full">
+            <Trash2 className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-bold">{notification}</span>
+          <button onClick={() => setNotification(null)} className="ml-2 hover:bg-white/20 p-1 rounded-full transition-colors">
+            <X className="w-4 h-4" />
+          </button>
         </div>
       )}
     </div>

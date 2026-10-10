@@ -10,10 +10,10 @@ export default function StokKeluarPage() {
 
   const stockOutTransactions = transactions.filter(t => t.type === 'KELUAR');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const success = addStockOut({
+    const success = await addStockOut({
       date: formData.get('date') as string,
       sparepartId: formData.get('sparepartId') as string,
       quantity: parseInt(formData.get('quantity') as string),

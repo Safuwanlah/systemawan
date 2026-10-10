@@ -11,10 +11,10 @@ export default function StokMasukPage() {
 
   const stockInTransactions = transactions.filter(t => t.type === 'MASUK');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    addStockIn({
+    await addStockIn({
       date: formData.get('date') as string,
       sparepartId: formData.get('sparepartId') as string,
       quantity: parseInt(formData.get('quantity') as string),

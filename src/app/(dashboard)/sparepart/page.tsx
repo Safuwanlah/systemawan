@@ -57,7 +57,7 @@ export default function SparepartPage() {
       hargaJual: parseInt(formData.get('hargaJual') as string) || 0,
       minStock: parseInt(formData.get('minStock') as string) || 5,
       location: (formData.get('location') as string) || '-',
-      supplierId: (formData.get('supplierId') as string) || null,
+      supplierId: (formData.get('supplierId') as string) || "",
     };
 
     if (editingData) {

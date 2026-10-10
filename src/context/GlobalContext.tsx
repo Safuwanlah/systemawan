@@ -62,7 +62,7 @@ interface GlobalContextType {
   
   // Actions
   addStockIn: (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => void;
-  addStockOut: (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => boolean;
+  addStockOut: (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => Promise<boolean>;
   addOpname: (sparepartId: string, physicalStock: number, keterangan: string) => void;
   addSparepart: (data: Omit<Sparepart, 'id' | 'status'>) => void;
   updateSparepart: (id: string, data: Partial<Sparepart>) => void;

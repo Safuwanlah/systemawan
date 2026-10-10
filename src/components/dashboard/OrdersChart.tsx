@@ -37,35 +37,35 @@ export default function OrdersChart() {
             data={data}
             margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#252946" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
             <XAxis 
               dataKey="name" 
-              stroke="#858BA8" 
+              stroke="var(--muted-foreground)" 
               fontSize={12} 
               tickLine={false} 
               axisLine={false}
               dy={10}
             />
             <YAxis 
-              stroke="#858BA8" 
+              stroke="var(--muted-foreground)" 
               fontSize={12} 
               tickLine={false} 
               axisLine={false}
               dx={-10}
             />
             <Tooltip 
-              cursor={{ fill: '#11142B' }}
-              contentStyle={{ backgroundColor: '#11142B', borderColor: '#252946', color: '#F5F7FF', borderRadius: '8px', fontSize: '13px' }}
-              itemStyle={{ color: '#3867FF', fontWeight: 'bold' }}
+              cursor={{ fill: 'var(--card)' }}
+              contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)', borderRadius: '8px', fontSize: '13px' }}
+              itemStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
               formatter={(value: any) => [`${value}`, 'Sales']}
             />
             <Bar 
               dataKey="value" 
-              fill="#3867FF" 
+              fill="var(--primary)" 
               radius={[2, 2, 0, 0]} 
               barSize={12}
               isAnimationActive={true}
-              animationDuration={1500}
+              animationDuration={800}
               animationEasing="ease-out"
             />
           </BarChart>

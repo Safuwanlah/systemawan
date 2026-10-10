@@ -18,6 +18,7 @@ export default function SparepartPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const categories = ['Semua', ...Array.from(new Set(spareparts.map(s => s.category)))];
   const mereks = ['Semua', ...Array.from(new Set(spareparts.map(s => s.merek)))];
@@ -43,17 +44,20 @@ export default function SparepartPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
+    
+    const code = editingData ? editingData.code : (formData.get('code') as string || `SPR-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`);
+    
     const data = {
-      code: formData.get('code') as string,
+      code,
       name: formData.get('name') as string,
-      merek: formData.get('merek') as string,
+      merek: (formData.get('merek') as string) || '-',
       category: formData.get('category') as string,
-      unit: formData.get('unit') as string,
-      hargaBeli: parseInt(formData.get('hargaBeli') as string),
-      hargaJual: parseInt(formData.get('hargaJual') as string),
-      minStock: parseInt(formData.get('minStock') as string),
-      location: formData.get('location') as string,
-      supplierId: formData.get('supplierId') as string,
+      unit: (formData.get('unit') as string) || 'pcs',
+      hargaBeli: parseInt(formData.get('hargaBeli') as string) || 0,
+      hargaJual: parseInt(formData.get('hargaJual') as string) || 0,
+      minStock: parseInt(formData.get('minStock') as string) || 5,
+      location: (formData.get('location') as string) || '-',
+      supplierId: (formData.get('supplierId') as string) || null,
     };
 
     if (editingData) {
@@ -72,6 +76,7 @@ export default function SparepartPage() {
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingData(null);
+    setShowAdvanced(false);
   };
 
   const confirmDelete = () => {
@@ -239,30 +244,14 @@ export default function SparepartPage() {
                 <button onClick={closeModal} className="text-muted-foreground hover:text-white transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
               </div>
               <form onSubmit={handleSubmit} className="p-6">
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Kode Sparepart *</label>
-                    <input type="text" name="code" defaultValue={editingData?.code} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Nama Sparepart *</label>
                     <input type="text" name="name" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Merek *</label>
-                    <input type="text" name="merek" defaultValue={editingData?.merek} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
-                  </div>
-                  <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Kategori *</label>
                     <input type="text" name="category" defaultValue={editingData?.category} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Satuan *</label>
-                    <input type="text" name="unit" defaultValue={editingData?.unit} required placeholder="pcs, set, botol" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Lokasi Rak *</label>
-                    <input type="text" name="location" defaultValue={editingData?.location} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Harga Beli *</label>
@@ -272,18 +261,57 @@ export default function SparepartPage() {
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Harga Jual *</label>
                     <input type="number" name="hargaJual" defaultValue={editingData?.hargaJual} min="0" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Stok Minimum *</label>
-                    <input type="number" name="minStock" defaultValue={editingData?.minStock} min="1" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-muted-foreground mb-1">Supplier Utama *</label>
-                    <select name="supplierId" defaultValue={editingData?.supplierId || ""} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
-                      <option value="" disabled>Pilih Supplier...</option>
-                      {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                    </select>
-                  </div>
                 </div>
+
+                <div className="mb-4">
+                  <button type="button" onClick={() => setShowAdvanced(!showAdvanced)} className="text-sm text-[#E53935] hover:text-[#D32F2F] font-medium transition-colors flex items-center gap-1">
+                    {showAdvanced ? 'Sembunyikan Opsi Lanjutan' : 'Tampilkan Opsi Lanjutan'}
+                    <ChevronRight className={`w-4 h-4 transition-transform ${showAdvanced ? 'rotate-90' : ''}`} />
+                  </button>
+                </div>
+
+                <AnimatePresence>
+                  {showAdvanced && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 pt-2 border-t border-border">
+                        {editingData && (
+                          <div>
+                            <label className="block text-sm font-medium text-muted-foreground mb-1">Kode Sparepart (Auto)</label>
+                            <input type="text" name="code" defaultValue={editingData.code} readOnly className="w-full bg-muted/50 border border-border rounded-lg px-4 py-2 text-muted-foreground cursor-not-allowed" />
+                          </div>
+                        )}
+                        <div>
+                          <label className="block text-sm font-medium text-muted-foreground mb-1">Merek</label>
+                          <input type="text" name="merek" defaultValue={editingData?.merek} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-muted-foreground mb-1">Satuan</label>
+                          <input type="text" name="unit" defaultValue={editingData?.unit || 'pcs'} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-muted-foreground mb-1">Lokasi Rak</label>
+                          <input type="text" name="location" defaultValue={editingData?.location} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-muted-foreground mb-1">Stok Minimum</label>
+                          <input type="number" name="minStock" defaultValue={editingData?.minStock || 5} min="1" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-muted-foreground mb-1">Supplier Utama</label>
+                          <select name="supplierId" defaultValue={editingData?.supplierId || ""} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
+                            <option value="">Pilih Supplier... (Opsional)</option>
+                            {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-border">
                   <button type="button" onClick={closeModal} className="px-4 py-2 text-muted-foreground hover:text-white font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
                   <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>

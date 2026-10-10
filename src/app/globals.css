@@ -3,6 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+  /* Colors */
   --background: #f8fafc;
   --foreground: #0f172a;
   
@@ -19,7 +20,14 @@
   
   --primary: #3867FF;
   --primary-foreground: #ffffff;
+
+  /* Animations */
+  --motion-fast: 160ms;
+  --motion-normal: 220ms;
+  --motion-slow: 280ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 
 .dark {
   --background: #080A1F;
@@ -62,4 +70,21 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Remove arrows/spinners from number inputs globally */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Global smooth transition for Theme Switching (Dark/Light Mode) */
+*, ::before, ::after {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }

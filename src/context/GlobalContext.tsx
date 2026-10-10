@@ -109,9 +109,9 @@ const initialTransactions: Transaction[] = [
 ];
 
 export function GlobalProvider({ children }: { children: ReactNode }) {
-  const [spareparts, setSpareparts] = useState<Sparepart[]>(initialSpareparts);
+  const [spareparts, setSpareparts] = useState<Sparepart[]>([]);
   const [suppliers, setSuppliers] = useState<Supplier[]>(initialSuppliers);
-  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [toast, setToast] = useState<{message: string, type: 'success'|'error'} | null>(null);
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -162,8 +162,24 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 
   // Initialization check for initial data
   useEffect(() => {
-    // Force a re-calc on mount to populate initial notifications
-    setTransactions(prev => [...prev]);
+    fetch('/api/spareparts')
+      .then(res => res.json())
+      .then(data => {
+        // Compute status for fetched data
+        const processed = data.map((sp: any) => ({
+          ...sp,
+          status: calculateStatus(sp.stock, sp.minStock)
+        }));
+        setSpareparts(processed);
+      })
+      .catch(console.error);
+
+    fetch('/api/transactions')
+      .then(res => res.json())
+      .then(data => {
+        setTransactions(data);
+      })
+      .catch(console.error);
   }, []);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
@@ -171,36 +187,59 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const addStockIn = (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => {
+  const addStockIn = async (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => {
     const sp = spareparts.find(s => s.id === data.sparepartId);
     if (!sp || data.quantity <= 0) return;
     
-    setSpareparts(prev => prev.map(s => s.id === data.sparepartId ? { ...s, stock: s.stock + data.quantity, status: calculateStatus(s.stock + data.quantity, s.minStock) } : s));
-    setTransactions(prev => [{
-      ...data,
-      id: `TX${Math.floor(Math.random()*100000)}`,
-      nomorTransaksi: `TRX-${Math.floor(Math.random()*10000)}`,
-      type: 'MASUK',
-    }, ...prev]);
-    showToast(`Stok ${sp.name} berhasil ditambahkan (+${data.quantity})`);
+    try {
+      const res = await fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, type: 'MASUK' })
+      });
+      if (res.ok) {
+        const newTx = await res.json();
+        setSpareparts(prev => prev.map(s => s.id === data.sparepartId ? { ...s, stock: s.stock + data.quantity, status: calculateStatus(s.stock + data.quantity, s.minStock) } : s));
+        setTransactions(prev => [newTx, ...prev]);
+        showToast(`Stok ${sp.name} berhasil ditambahkan (+${data.quantity})`);
+      } else {
+        const err = await res.json();
+        showToast(err.error || 'Gagal mencatat transaksi', 'error');
+      }
+    } catch (e) {
+      showToast('Kesalahan jaringan', 'error');
+    }
   };
 
-  const addStockOut = (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => {
+  const addStockOut = async (data: Omit<Transaction, 'id' | 'type' | 'nomorTransaksi'>) => {
     const sp = spareparts.find(s => s.id === data.sparepartId);
     if (!sp) return false;
     if (data.quantity > sp.stock) {
       showToast(`Stok tidak mencukupi! Stok tersedia hanya ${sp.stock} ${sp.unit}.`, 'error');
       return false;
     }
-    setSpareparts(prev => prev.map(s => s.id === data.sparepartId ? { ...s, stock: s.stock - data.quantity, status: calculateStatus(s.stock - data.quantity, s.minStock) } : s));
-    setTransactions(prev => [{
-      ...data,
-      id: `TX${Math.floor(Math.random()*100000)}`,
-      nomorTransaksi: `TRX-${Math.floor(Math.random()*10000)}`,
-      type: 'KELUAR',
-    }, ...prev]);
-    showToast(`Stok ${sp.name} berhasil dikeluarkan (-${data.quantity})`);
-    return true;
+
+    try {
+      const res = await fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, type: 'KELUAR' })
+      });
+      if (res.ok) {
+        const newTx = await res.json();
+        setSpareparts(prev => prev.map(s => s.id === data.sparepartId ? { ...s, stock: s.stock - data.quantity, status: calculateStatus(s.stock - data.quantity, s.minStock) } : s));
+        setTransactions(prev => [newTx, ...prev]);
+        showToast(`Stok ${sp.name} berhasil dikeluarkan (-${data.quantity})`);
+        return true;
+      } else {
+        const err = await res.json();
+        showToast(err.error || 'Gagal mencatat transaksi', 'error');
+        return false;
+      }
+    } catch (e) {
+      showToast('Kesalahan jaringan', 'error');
+      return false;
+    }
   };
 
   const addOpname = (sparepartId: string, physicalStock: number, keterangan: string) => {
@@ -223,29 +262,66 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
     showToast(`Stok Opname ${sp.name} berhasil disimpan.`);
   };
 
-  const addSparepart = (data: Omit<Sparepart, 'id' | 'status'>) => {
-    setSpareparts(prev => [{
-      ...data,
-      id: `SP${Math.floor(Math.random()*100000)}`,
-      status: calculateStatus(data.stock, data.minStock)
-    }, ...prev]);
-    showToast(`Sparepart ${data.name} berhasil ditambahkan`);
-  };
-
-  const updateSparepart = (id: string, data: Partial<Sparepart>) => {
-    setSpareparts(prev => prev.map(s => {
-      if (s.id === id) {
-        const updated = { ...s, ...data };
-        return { ...updated, status: calculateStatus(updated.stock, updated.minStock) };
+  const addSparepart = async (data: Omit<Sparepart, 'id' | 'status'>) => {
+    try {
+      const res = await fetch('/api/spareparts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        const newSp = await res.json();
+        setSpareparts(prev => [{
+          ...newSp,
+          status: calculateStatus(newSp.stock, newSp.minStock)
+        }, ...prev]);
+        showToast(`Sparepart ${data.name} berhasil ditambahkan`);
+      } else {
+        const err = await res.json();
+        showToast(err.error || 'Gagal menambahkan sparepart', 'error');
       }
-      return s;
-    }));
-    showToast(`Sparepart berhasil diubah`);
+    } catch (e) {
+      showToast('Terjadi kesalahan jaringan', 'error');
+    }
   };
 
-  const deleteSparepart = (id: string) => {
-    setSpareparts(prev => prev.filter(s => s.id !== id));
-    showToast('Sparepart berhasil dihapus');
+  const updateSparepart = async (id: string, data: Partial<Sparepart>) => {
+    try {
+      const res = await fetch(`/api/spareparts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setSpareparts(prev => prev.map(s => {
+          if (s.id === id) {
+            return { ...updated, status: calculateStatus(updated.stock, updated.minStock) };
+          }
+          return s;
+        }));
+        showToast(`Sparepart berhasil diubah`);
+      } else {
+        showToast('Gagal mengubah sparepart', 'error');
+      }
+    } catch (e) {
+      showToast('Terjadi kesalahan jaringan', 'error');
+    }
+  };
+
+  const deleteSparepart = async (id: string) => {
+    try {
+      const res = await fetch(`/api/spareparts/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setSpareparts(prev => prev.filter(s => s.id !== id));
+        showToast('Sparepart berhasil dihapus');
+      } else {
+        const err = await res.json();
+        showToast(err.error || 'Gagal menghapus sparepart', 'error');
+      }
+    } catch (e) {
+      showToast('Terjadi kesalahan jaringan', 'error');
+    }
   };
 
   const markNotificationRead = (id: string) => {

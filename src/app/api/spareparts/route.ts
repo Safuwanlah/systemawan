@@ -15,7 +15,7 @@ export async function GET(request: Request) {
       },
       include: {
         category: true,
-        brand: true,
+        supplier: true,
       },
       orderBy: { createdAt: 'desc' }
     });
@@ -28,7 +28,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { code, name, description, price, minStock, categoryId, brandId } = body;
+    const { code, name, merek, unit, hargaBeli, hargaJual, minStock, stock, location, categoryId, supplierId } = body;
 
     if (!code || !name) {
       return NextResponse.json({ error: 'Code and Name are required' }, { status: 400 });
@@ -38,11 +38,15 @@ export async function POST(request: Request) {
       data: { 
         code, 
         name, 
-        description, 
-        price: Number(price) || 0, 
+        merek, 
+        unit: unit || 'pcs', 
+        hargaBeli: Number(hargaBeli) || 0, 
+        hargaJual: Number(hargaJual) || 0, 
         minStock: Number(minStock) || 5, 
+        stock: Number(stock) || 0,
+        location,
         categoryId, 
-        brandId 
+        supplierId 
       },
     });
     
@@ -51,6 +55,6 @@ export async function POST(request: Request) {
     if (error.code === 'P2002') {
       return NextResponse.json({ error: 'Sparepart code already exists' }, { status: 400 });
     }
-    return NextResponse.json({ error: 'Failed to create sparepart' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to create sparepart', details: error.message }, { status: 500 });
   }
 }

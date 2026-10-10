@@ -17,24 +17,24 @@ export default function StockChart({ data }: { data: any[] }) {
         >
           <defs>
             <linearGradient id="colorStock" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3867FF" stopOpacity={1}/>
-              <stop offset="95%" stopColor="#3867FF" stopOpacity={0.6}/>
+              <stop offset="5%" stopColor="var(--primary)" stopOpacity={1}/>
+              <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.6}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#252946" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
           <XAxis 
             dataKey="name" 
-            stroke="#858BA8" 
+            stroke="var(--muted-foreground)" 
             fontSize={12} 
             tickLine={false} 
             axisLine={false}
             tickFormatter={(value) => value.length > 10 ? value.substring(0, 10) + '...' : value}
           />
-          <YAxis stroke="#858BA8" fontSize={12} tickLine={false} axisLine={false} />
+          <YAxis stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
           <Tooltip 
-            cursor={{ fill: '#11142B' }}
-            contentStyle={{ backgroundColor: '#11142B', borderColor: '#252946', color: '#F5F7FF', borderRadius: '8px' }}
-            itemStyle={{ color: '#3867FF', fontWeight: 'bold' }}
+            cursor={{ fill: 'var(--card)' }}
+            contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)', borderRadius: '8px' }}
+            itemStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
           />
           <Bar 
             dataKey="stock" 
@@ -42,7 +42,7 @@ export default function StockChart({ data }: { data: any[] }) {
             radius={[6, 6, 0, 0]} 
             barSize={36} 
             isAnimationActive={true}
-            animationDuration={1500} 
+            animationDuration={800} 
             animationEasing="ease-out"
           />
         </BarChart>

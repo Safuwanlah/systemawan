@@ -32,8 +32,8 @@ export default function TrendChart() {
         >
           <defs>
             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3867FF" stopOpacity={0.3}/>
-              <stop offset="95%" stopColor="#3867FF" stopOpacity={0}/>
+              <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.3}/>
+              <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
             </linearGradient>
             <filter id="glow">
               <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
@@ -43,17 +43,17 @@ export default function TrendChart() {
               </feMerge>
             </filter>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#252946" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
           <XAxis 
             dataKey="name" 
-            stroke="#858BA8" 
+            stroke="var(--muted-foreground)" 
             fontSize={12} 
             tickLine={false} 
             axisLine={false}
             dy={10}
           />
           <YAxis 
-            stroke="#858BA8" 
+            stroke="var(--muted-foreground)" 
             fontSize={12} 
             tickLine={false} 
             axisLine={false}
@@ -62,21 +62,21 @@ export default function TrendChart() {
             ticks={[0, 200, 400, 600, 800, 1000, 1200]}
           />
           <Tooltip 
-            cursor={{ stroke: '#3867FF', strokeWidth: 1, strokeDasharray: '5 5' }}
-            contentStyle={{ backgroundColor: '#11142B', borderColor: '#252946', color: '#F5F7FF', borderRadius: '8px' }}
-            itemStyle={{ color: '#3867FF', fontWeight: 'bold' }}
+            cursor={{ stroke: 'var(--primary)', strokeWidth: 1, strokeDasharray: '5 5' }}
+            contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)', borderRadius: '8px' }}
+            itemStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
           />
           <Area 
             type="natural" 
             dataKey="value" 
-            stroke="#3867FF" 
+            stroke="var(--primary)" 
             strokeWidth={4}
             fillOpacity={1} 
             fill="url(#colorValue)" 
-            activeDot={{ r: 6, fill: '#3867FF', stroke: '#11142B', strokeWidth: 3 }}
+            activeDot={{ r: 6, fill: 'var(--primary)', stroke: 'var(--card)', strokeWidth: 3 }}
             style={{ filter: 'url(#glow)' }}
             isAnimationActive={true}
-            animationDuration={1500}
+            animationDuration={800}
             animationEasing="ease-out"
           />
         </AreaChart>

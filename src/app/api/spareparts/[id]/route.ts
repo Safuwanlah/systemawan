@@ -8,7 +8,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       where: { id },
       include: {
         category: true,
-        brand: true,
+        supplier: true,
         transactions: {
           orderBy: { createdAt: 'desc' },
           take: 10,
@@ -27,17 +27,21 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   try {
     const id = (await params).id;
     const body = await request.json();
-    const { name, description, price, minStock, categoryId, brandId } = body;
+    const { name, merek, unit, hargaBeli, hargaJual, minStock, stock, location, categoryId, supplierId } = body;
 
     const sparepart = await prisma.sparepart.update({
       where: { id },
       data: { 
         name, 
-        description, 
-        price: price !== undefined ? Number(price) : undefined, 
+        merek, 
+        unit, 
+        hargaBeli: hargaBeli !== undefined ? Number(hargaBeli) : undefined, 
+        hargaJual: hargaJual !== undefined ? Number(hargaJual) : undefined, 
         minStock: minStock !== undefined ? Number(minStock) : undefined, 
+        stock: stock !== undefined ? Number(stock) : undefined,
+        location,
         categoryId, 
-        brandId 
+        supplierId 
       },
     });
     

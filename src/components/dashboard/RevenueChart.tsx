@@ -40,42 +40,42 @@ export default function RevenueChart() {
           >
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3867FF" stopOpacity={0.2}/>
-                <stop offset="95%" stopColor="#3867FF" stopOpacity={0}/>
+                <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.2}/>
+                <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#252946" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
             <XAxis 
               dataKey="name" 
-              stroke="#858BA8" 
+              stroke="var(--muted-foreground)" 
               fontSize={12} 
               tickLine={false} 
               axisLine={false}
               dy={10}
             />
             <YAxis 
-              stroke="#858BA8" 
+              stroke="var(--muted-foreground)" 
               fontSize={12} 
               tickLine={false} 
               axisLine={false}
               dx={-10}
             />
             <Tooltip 
-              cursor={{ stroke: '#3867FF', strokeWidth: 1, strokeDasharray: '4 4' }}
-              contentStyle={{ backgroundColor: '#11142B', borderColor: '#252946', color: '#F5F7FF', borderRadius: '8px', fontSize: '13px' }}
-              itemStyle={{ color: '#3867FF', fontWeight: 'bold' }}
+              cursor={{ stroke: 'var(--primary)', strokeWidth: 1, strokeDasharray: '4 4' }}
+              contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', color: 'var(--foreground)', borderRadius: '8px', fontSize: '13px' }}
+              itemStyle={{ color: 'var(--primary)', fontWeight: 'bold' }}
               formatter={(value: any) => [`$${value}M`, 'Revenue']}
             />
             <Area 
               type="natural" 
               dataKey="value" 
-              stroke="#3867FF" 
+              stroke="var(--primary)" 
               strokeWidth={4}
               fillOpacity={1} 
               fill="url(#colorValue)" 
-              activeDot={{ r: 6, fill: '#3867FF', stroke: '#151832', strokeWidth: 3 }}
+              activeDot={{ r: 6, fill: 'var(--primary)', stroke: 'var(--accent)', strokeWidth: 3 }}
               isAnimationActive={true}
-              animationDuration={1500}
+              animationDuration={800}
               animationEasing="ease-out"
             />
           </AreaChart>

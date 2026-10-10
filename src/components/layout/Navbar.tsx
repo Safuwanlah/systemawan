@@ -78,7 +78,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav ref={navRef} className="sticky top-0 z-50 w-full h-16 md:h-[72px] bg-[#0F1113] border-b border-[#25292D] shadow-[0_4px_20px_rgba(0,0,0,0.4)] text-[#F5F5F5] font-sans selection:bg-[#E53935] selection:text-white relative">
+    <nav ref={navRef} className="sticky top-0 z-50 w-full h-16 md:h-[72px] bg-muted border-b border-[#25292D] shadow-[0_4px_20px_rgba(0,0,0,0.4)] text-foreground font-sans selection:bg-[#E53935] selection:text-white relative">
       {/* Subtle automotive elements */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#F5F5F5 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E53935]/50 to-transparent"></div>
@@ -88,7 +88,7 @@ export default function Navbar() {
         {/* LEFT: BRAND */}
         <div className="flex items-center gap-3 mr-8 shrink-0">
           <Link href="/" className="flex items-center gap-3 group" onClick={closeMobileMenu}>
-            <div className="w-10 h-10 rounded bg-gradient-to-br from-[#1B1F23] to-[#111315] border border-[#292D32] flex items-center justify-center shadow-inner group-hover:border-[#E53935]/50 transition-colors">
+            <div className="w-10 h-10 rounded bg-gradient-to-br from-[#1B1F23] to-[#111315] border border-border flex items-center justify-center shadow-inner group-hover:border-[#E53935]/50 transition-colors">
               <Wrench className="w-5 h-5 text-[#E53935]" />
             </div>
             <div className="flex flex-col">
@@ -115,8 +115,8 @@ export default function Navbar() {
                   href={item.path}
                   className={`px-3 xl:px-4 py-2 rounded-md font-medium text-sm transition-all duration-200 flex items-center gap-2
                     ${isActive 
-                      ? 'text-[#F5F5F5] bg-[#1B1F23] border-b-2 border-[#E53935]' 
-                      : 'text-[#A1A7B0] hover:text-[#F5F5F5] hover:bg-[#1B1F23]/50'
+                      ? 'text-foreground bg-[#1B1F23] border-b-2 border-[#E53935]' 
+                      : 'text-[#A1A7B0] hover:text-foreground hover:bg-[#1B1F23]/50'
                     }
                   `}
                 >
@@ -126,13 +126,13 @@ export default function Navbar() {
 
                 {/* Desktop Dropdown */}
                 {hasDropdown && activeDropdown === item.name && (
-                  <div className="absolute top-[calc(100%-4px)] left-0 w-48 bg-[#1B1F23] border border-[#292D32] rounded-md shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                  <div className="absolute top-[calc(100%-4px)] left-0 w-48 bg-[#1B1F23] border border-border rounded-md shadow-xl py-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                     <div className="absolute top-0 left-4 w-8 h-[2px] bg-[#E53935]"></div>
                     {item.dropdown.map((dropItem) => (
                       <Link 
                         key={dropItem.name} 
                         href={dropItem.path}
-                        className="block px-4 py-2.5 text-sm text-[#A1A7B0] hover:text-white hover:bg-[#292D32]/50 transition-colors"
+                        className="block px-4 py-2.5 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors"
                         onClick={() => setActiveDropdown(null)}
                       >
                         {dropItem.name}
@@ -153,7 +153,7 @@ export default function Navbar() {
               <input 
                 type="text" 
                 placeholder="Cari sparepart..." 
-                className="absolute right-10 w-64 h-9 bg-[#1B1F23] border border-[#292D32] rounded-md pl-3 pr-4 text-sm text-white placeholder-[#5A6068] focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all animate-in fade-in slide-in-from-right-4"
+                className="absolute right-10 w-64 h-9 bg-[#1B1F23] border border-border rounded-md pl-3 pr-4 text-sm text-white placeholder-[#5A6068] focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all animate-in fade-in slide-in-from-right-4"
                 autoFocus
               />
             )}
@@ -199,18 +199,18 @@ export default function Navbar() {
 
             {/* User Dropdown */}
             {activeDropdown === 'user' && (
-              <div className="absolute top-full right-0 mt-1 w-48 bg-[#1B1F23] border border-[#292D32] rounded-md shadow-xl py-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                <div className="px-4 py-2 border-b border-[#292D32] mb-1">
+              <div className="absolute top-full right-0 mt-1 w-48 bg-[#1B1F23] border border-border rounded-md shadow-xl py-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="px-4 py-2 border-b border-border mb-1">
                   <p className="text-sm font-medium text-white">Admin</p>
                   <p className="text-xs text-[#8A9098]">admin@garasi.id</p>
                 </div>
-                <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-[#292D32]/50 transition-colors">
+                <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
                   <User className="w-4 h-4" /> Profil Saya
                 </Link>
-                <Link href="/settings" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-[#292D32]/50 transition-colors">
+                <Link href="/settings" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
                   <Settings className="w-4 h-4" /> Pengaturan
                 </Link>
-                <Link href="/help" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-[#292D32]/50 transition-colors">
+                <Link href="/help" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
                   <HelpCircle className="w-4 h-4" /> Bantuan
                 </Link>
                 <div className="h-[1px] bg-[#292D32] my-1"></div>
@@ -244,7 +244,7 @@ export default function Navbar() {
           <button 
             aria-label="Toggle Menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[#F5F5F5] hover:bg-[#1B1F23] rounded-md transition-colors border border-[#292D32]"
+            className="p-2 text-foreground hover:bg-[#1B1F23] rounded-md transition-colors border border-border"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -254,15 +254,15 @@ export default function Navbar() {
 
       {/* MOBILE MENU OVERLAY */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-[100%] left-0 w-full bg-[#111315] border-b border-[#292D32] shadow-xl overflow-y-auto max-h-[calc(100vh-64px)] z-40 animate-in slide-in-from-top-2">
+        <div className="lg:hidden absolute top-[100%] left-0 w-full bg-[#111315] border-b border-border shadow-xl overflow-y-auto max-h-[calc(100vh-64px)] z-40 animate-in slide-in-from-top-2">
           {/* Mobile Search */}
-          <div className="p-4 border-b border-[#292D32]">
+          <div className="p-4 border-b border-border">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5A6068]" />
               <input 
                 type="text" 
                 placeholder="Cari sparepart..." 
-                className="w-full bg-[#1B1F23] border border-[#292D32] rounded-md py-2 pl-9 pr-4 text-sm text-white placeholder-[#5A6068] focus:outline-none focus:border-[#E53935]"
+                className="w-full bg-[#1B1F23] border border-border rounded-md py-2 pl-9 pr-4 text-sm text-white placeholder-[#5A6068] focus:outline-none focus:border-[#E53935]"
               />
             </div>
           </div>
@@ -300,7 +300,7 @@ export default function Navbar() {
 
                   {/* Mobile Submenu */}
                   {hasDropdown && isDropdownOpen && (
-                    <div className="ml-11 mt-1 mb-2 space-y-1 border-l border-[#292D32] pl-2">
+                    <div className="ml-11 mt-1 mb-2 space-y-1 border-l border-border pl-2">
                       {item.dropdown.map((dropItem) => {
                         const isDropActive = pathname === dropItem.path;
                         return (
@@ -323,7 +323,7 @@ export default function Navbar() {
             })}
           </div>
           
-          <div className="border-t border-[#292D32] p-4 mt-2">
+          <div className="border-t border-border p-4 mt-2">
             <button 
               onClick={() => setIsLogoutModalOpen(true)}
               className="flex items-center gap-3 text-sm text-[#E53935] font-medium px-4 py-2 w-full hover:bg-[#E53935]/10 rounded-md transition-colors"

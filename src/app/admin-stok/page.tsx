@@ -134,12 +134,12 @@ export default function StandaloneAdminStok() {
   };
 
   return (
-    <div className="flex h-screen bg-[#0F1113] font-sans text-slate-200 overflow-hidden">
+    <div className="flex h-screen bg-muted font-sans text-slate-200 overflow-hidden">
       
       {/* SIDEBAR MINIMALIS */}
-      <aside className="w-64 bg-[#141619] border-r border-[#292D32] flex flex-col shrink-0 hidden md:flex">
+      <aside className="w-64 bg-[#141619] border-r border-border flex flex-col shrink-0 hidden md:flex">
         {/* Logo */}
-        <div className="h-20 flex items-center px-6 border-b border-[#292D32]">
+        <div className="h-20 flex items-center px-6 border-b border-border">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
               <Boxes className="w-5 h-5 text-white" />
@@ -160,7 +160,7 @@ export default function StandaloneAdminStok() {
         </nav>
         
         {/* Footer Sidebar */}
-        <div className="p-4 border-t border-[#292D32]">
+        <div className="p-4 border-t border-border">
           <Link href="/" className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-[#1B1F23] rounded-xl transition-colors w-full">
             <LogOut className="w-5 h-5" />
             <span>Kembali ke Web Utama</span>
@@ -188,21 +188,21 @@ export default function StandaloneAdminStok() {
         <div className="px-8 pb-8 space-y-6 flex-1">
           {/* STATS CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-[#292D32] flex items-center gap-4">
+            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-border flex items-center gap-4">
               <div className="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center"><Package className="w-6 h-6" /></div>
               <div>
                 <p className="text-sm text-slate-400 font-medium">Total Jenis Barang</p>
                 <p className="text-2xl font-bold text-white">{totalItems}</p>
               </div>
             </div>
-            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-[#292D32] flex items-center gap-4">
+            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-border flex items-center gap-4">
               <div className="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center"><Boxes className="w-6 h-6" /></div>
               <div>
                 <p className="text-sm text-slate-400 font-medium">Total Unit Fisik</p>
                 <p className="text-2xl font-bold text-white">{totalUnits}</p>
               </div>
             </div>
-            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-[#292D32] flex items-center gap-4">
+            <div className="bg-[#1B1F23] p-5 rounded-2xl border border-border flex items-center gap-4">
               <div className="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center"><ArrowDownToLine className="w-6 h-6" /></div>
               <div>
                 <p className="text-sm text-slate-400 font-medium">Barang Masuk (Hari Ini)</p>
@@ -221,8 +221,8 @@ export default function StandaloneAdminStok() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             
             {/* KOLOM KIRI (TABEL) */}
-            <div className="lg:col-span-2 bg-[#1B1F23] border border-[#292D32] rounded-2xl overflow-hidden flex flex-col shadow-sm">
-              <div className="p-5 border-b border-[#292D32] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="lg:col-span-2 bg-[#1B1F23] border border-border rounded-2xl overflow-hidden flex flex-col shadow-sm">
+              <div className="p-5 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <h3 className="font-semibold text-white">Daftar Barang</h3>
                 <div className="flex items-center gap-3">
                   <div className="relative">
@@ -230,13 +230,13 @@ export default function StandaloneAdminStok() {
                     <input 
                       type="text" 
                       placeholder="Cari SKU / Nama..." 
-                      className="pl-9 pr-4 py-2 bg-[#0F1113] border border-[#292D32] rounded-lg text-sm w-full sm:w-56 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-200 placeholder-slate-500 transition-all"
+                      className="pl-9 pr-4 py-2 bg-muted border border-border rounded-lg text-sm w-full sm:w-56 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-slate-200 placeholder-slate-500 transition-all"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                     />
                   </div>
                   <select 
-                    className="bg-[#0F1113] border border-[#292D32] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 text-slate-200"
+                    className="bg-muted border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 text-slate-200"
                     value={categoryFilter}
                     onChange={(e) => setCategoryFilter(e.target.value)}
                   >
@@ -251,10 +251,10 @@ export default function StandaloneAdminStok() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="bg-[#141619] text-slate-400 text-xs uppercase tracking-wider">
-                      <th className="px-6 py-4 font-semibold border-b border-[#292D32]">Barang & SKU</th>
-                      <th className="px-6 py-4 font-semibold border-b border-[#292D32] text-center">Status</th>
-                      <th className="px-6 py-4 font-semibold border-b border-[#292D32] text-center">Stok</th>
-                      <th className="px-6 py-4 font-semibold border-b border-[#292D32] text-center">Aksi Cepat</th>
+                      <th className="px-6 py-4 font-semibold border-b border-border">Barang & SKU</th>
+                      <th className="px-6 py-4 font-semibold border-b border-border text-center">Status</th>
+                      <th className="px-6 py-4 font-semibold border-b border-border text-center">Stok</th>
+                      <th className="px-6 py-4 font-semibold border-b border-border text-center">Aksi Cepat</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#292D32]">
@@ -288,7 +288,7 @@ export default function StandaloneAdminStok() {
                               <button 
                                 onClick={() => dispatch({ type: 'REDUCE_STOCK', id: product.id, qty: 1 })}
                                 disabled={product.stock === 0}
-                                className="w-8 h-8 flex items-center justify-center bg-[#0F1113] border border-[#292D32] text-slate-400 hover:bg-[#292D32] hover:text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-8 h-8 flex items-center justify-center bg-muted border border-border text-slate-400 hover:bg-accent hover:text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 title="Kurangi 1"
                               >
                                 <Minus className="w-4 h-4" />
@@ -317,8 +317,8 @@ export default function StandaloneAdminStok() {
             </div>
 
             {/* KOLOM KANAN (LOG) */}
-            <div className="bg-[#1B1F23] border border-[#292D32] rounded-2xl overflow-hidden shadow-sm flex flex-col h-[500px]">
-              <div className="p-5 border-b border-[#292D32] flex items-center gap-2 shrink-0">
+            <div className="bg-[#1B1F23] border border-border rounded-2xl overflow-hidden shadow-sm flex flex-col h-[500px]">
+              <div className="p-5 border-b border-border flex items-center gap-2 shrink-0">
                 <History className="w-5 h-5 text-slate-400" />
                 <h3 className="font-semibold text-white">Log Aktivitas</h3>
               </div>
@@ -353,13 +353,13 @@ export default function StandaloneAdminStok() {
       {/* MODAL TAMBAH BARANG (SEDERHANA) */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#1B1F23] border border-[#292D32] rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="px-6 py-5 border-b border-[#292D32] flex items-center justify-between bg-[#141619]">
+          <div className="bg-[#1B1F23] border border-border rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="px-6 py-5 border-b border-border flex items-center justify-between bg-[#141619]">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center"><Package className="w-4 h-4" /></div>
                 Tambah Barang Baru
               </h3>
-              <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-[#292D32] transition-colors">
+              <button onClick={() => setIsAddModalOpen(false)} className="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-accent transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -367,31 +367,31 @@ export default function StandaloneAdminStok() {
               <div className="grid grid-cols-2 gap-5 text-slate-200">
                 <div className="col-span-2">
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Nama Barang</label>
-                  <input required type="text" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.name} onChange={e => setNewProduct({...newProduct, name: e.target.value})} placeholder="Contoh: Busi Motor NMAX" />
+                  <input required type="text" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.name} onChange={e => setNewProduct({...newProduct, name: e.target.value})} placeholder="Contoh: Busi Motor NMAX" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">SKU / Kode</label>
-                  <input required type="text" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.sku} onChange={e => setNewProduct({...newProduct, sku: e.target.value})} placeholder="SKU-XXX" />
+                  <input required type="text" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.sku} onChange={e => setNewProduct({...newProduct, sku: e.target.value})} placeholder="SKU-XXX" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Kategori</label>
-                  <input required type="text" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})} placeholder="Oli / Busi" />
+                  <input required type="text" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.category} onChange={e => setNewProduct({...newProduct, category: e.target.value})} placeholder="Oli / Busi" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Stok Awal</label>
-                  <input required type="number" min="0" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.stock || ''} onChange={e => setNewProduct({...newProduct, stock: parseInt(e.target.value) || 0})} />
+                  <input required type="number" min="0" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.stock || ''} onChange={e => setNewProduct({...newProduct, stock: parseInt(e.target.value) || 0})} />
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Satuan</label>
-                  <input required type="text" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.unit} onChange={e => setNewProduct({...newProduct, unit: e.target.value})} placeholder="pcs, botol" />
+                  <input required type="text" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.unit} onChange={e => setNewProduct({...newProduct, unit: e.target.value})} placeholder="pcs, botol" />
                 </div>
                 <div className="col-span-2">
                   <label className="block text-[11px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Minimal Stok (Peringatan)</label>
-                  <input required type="number" min="0" className="w-full bg-[#0F1113] border border-[#292D32] rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.minStock || ''} onChange={e => setNewProduct({...newProduct, minStock: parseInt(e.target.value) || 0})} placeholder="Misal: 5" />
+                  <input required type="number" min="0" className="w-full bg-muted border border-border rounded-xl px-4 py-2.5 text-sm focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:outline-none placeholder-slate-600 transition-colors" value={newProduct.minStock || ''} onChange={e => setNewProduct({...newProduct, minStock: parseInt(e.target.value) || 0})} placeholder="Misal: 5" />
                 </div>
               </div>
-              <div className="pt-6 mt-2 border-t border-[#292D32] flex justify-end gap-3">
-                <button type="button" onClick={() => setIsAddModalOpen(false)} className="px-5 py-2.5 text-sm font-medium text-slate-300 bg-transparent hover:bg-[#292D32] rounded-xl transition-colors">Batal</button>
+              <div className="pt-6 mt-2 border-t border-border flex justify-end gap-3">
+                <button type="button" onClick={() => setIsAddModalOpen(false)} className="px-5 py-2.5 text-sm font-medium text-slate-300 bg-transparent hover:bg-accent rounded-xl transition-colors">Batal</button>
                 <button type="submit" className="px-5 py-2.5 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">Simpan Ke Database</button>
               </div>
             </form>

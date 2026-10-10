@@ -48,24 +48,24 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
   return (
     <>
       <aside 
-        className={`fixed lg:relative h-full bg-[#11142B] border-[#252946] flex flex-col shrink-0 transition-[width,transform,border-width] ease-in-out duration-300 z-50 ${
+        className={`fixed lg:relative h-full bg-card border-border flex flex-col shrink-0 transition-[width,transform,border-width] ease-in-out duration-300 z-50 ${
           isSidebarOpen ? 'w-[260px] translate-x-0 border-r' : 'w-0 -translate-x-full lg:translate-x-0 border-r-0 overflow-hidden'
         }`}
       >
         {/* Brand & Toggle */}
-        <div className={`h-[72px] flex items-center border-b border-[#252946] overflow-hidden shrink-0 transition-all duration-300 ${
+        <div className={`h-[72px] flex items-center border-b border-border overflow-hidden shrink-0 transition-all duration-300 ${
           isSidebarOpen ? 'px-5 justify-start' : 'px-0 justify-center'
         }`}>
           <div className={`flex items-center transition-all duration-300 ${isSidebarOpen ? 'gap-3' : 'gap-0'}`}>
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 rounded-xl text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832] transition-all duration-200 shrink-0"
+              className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 shrink-0"
               title="Toggle Sidebar"
             >
               <Menu className="w-6 h-6" />
             </button>
             {isSidebarOpen && (
-              <span className={`font-bold text-[#F5F7FF] text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out opacity-100 translate-x-0 max-w-[150px]`}>
+              <span className={`font-bold text-foreground text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out opacity-100 translate-x-0 max-w-[150px]`}>
                 System Awan
               </span>
             )}
@@ -87,18 +87,18 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
                   isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
                 } ${
                   isActive 
-                    ? 'text-white' 
-                    : 'text-[#858BA8] hover:text-[#F5F7FF] hover:bg-[#151832]'
+                    ? 'text-primary-foreground' 
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="sidebar-active-indicator"
-                    className="absolute inset-0 bg-[#3867FF] rounded-xl shadow-[0_4px_12px_rgba(56,103,255,0.25)] -z-10"
+                    className="absolute inset-0 bg-primary rounded-xl shadow-[0_4px_12px_rgba(56,103,255,0.25)] -z-10"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <item.icon className={`w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-white' : 'text-[#858BA8] group-hover:text-[#F5F7FF]'}`} />
+                <item.icon className={`w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'}`} />
                 <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
                   isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
                 }`}>
@@ -110,13 +110,13 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         </nav>
 
         {/* Logout Action */}
-        <div className={`p-4 border-t border-[#252946] shrink-0 ${!isSidebarOpen ? 'hidden' : ''}`}>
+        <div className={`p-4 border-t border-border shrink-0 ${!isSidebarOpen ? 'hidden' : ''}`}>
           <button
             onClick={() => setIsLogoutModalOpen(true)}
             title={!isSidebarOpen ? "Logout" : ""}
             className={`w-full flex items-center py-3 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
               isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
-            } text-[#858BA8] hover:bg-[#FF4D67]/10 hover:text-[#FF4D67]`}
+            } text-muted-foreground hover:bg-[#FF4D67]/10 hover:text-[#FF4D67]`}
           >
             <LogOut className="w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110" />
             <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${

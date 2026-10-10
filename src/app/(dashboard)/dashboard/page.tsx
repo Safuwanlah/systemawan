@@ -15,8 +15,8 @@ export default async function Dashboard() {
       {/* Dashboard Header */}
       <StaggerItem>
         <div className="flex flex-col gap-1 mb-8">
-          <h1 className="text-[24px] font-bold text-[#F5F7FF] tracking-tight">Dashboard Utama</h1>
-          <div className="text-[13px] text-[#858BA8] flex items-center gap-2">
+          <h1 className="text-[24px] font-bold text-foreground tracking-tight">Dashboard Utama</h1>
+          <div className="text-[13px] text-muted-foreground flex items-center gap-2">
             <span>Dashboard</span>
             <span>/</span>
             <span className="text-[#3867FF]">Overview</span>

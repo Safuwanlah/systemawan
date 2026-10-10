@@ -8,29 +8,29 @@ export default function RecentOrders() {
   ];
 
   return (
-    <div className="bg-[#151832] border border-[#252946] rounded-xl shadow-sm overflow-hidden h-full">
-      <div className="px-6 py-5 border-b border-[#252946]">
-        <h3 className="font-semibold text-[#F5F7FF] text-[16px]">Recent Orders</h3>
+    <div className="bg-accent border border-border rounded-xl shadow-sm overflow-hidden h-full">
+      <div className="px-6 py-5 border-b border-border">
+        <h3 className="font-semibold text-foreground text-[16px]">Recent Orders</h3>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-[#11142B] border-b border-[#252946]">
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Order ID</th>
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Customer</th>
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Product</th>
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Date</th>
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Status</th>
-              <th className="px-6 py-4 text-[12px] font-medium text-[#858BA8]">Amount</th>
+            <tr className="bg-card border-b border-border">
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Order ID</th>
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Customer</th>
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Product</th>
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Date</th>
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Status</th>
+              <th className="px-6 py-4 text-[12px] font-medium text-muted-foreground">Amount</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#252946]">
             {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-[#11142B] transition-colors">
+              <tr key={order.id} className="hover:bg-card transition-colors">
                 <td className="px-6 py-4 text-[14px] font-medium text-[#3867FF]">{order.id}</td>
-                <td className="px-6 py-4 text-[14px] text-[#F5F7FF]">{order.customer}</td>
-                <td className="px-6 py-4 text-[14px] text-[#F5F7FF]">{order.product}</td>
-                <td className="px-6 py-4 text-[14px] text-[#858BA8]">{order.date}</td>
+                <td className="px-6 py-4 text-[14px] text-foreground">{order.customer}</td>
+                <td className="px-6 py-4 text-[14px] text-foreground">{order.product}</td>
+                <td className="px-6 py-4 text-[14px] text-muted-foreground">{order.date}</td>
                 <td className="px-6 py-4">
                   <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${
                     order.status === 'Completed' ? 'bg-[#20C997]/10 text-[#20C997] border-[#20C997]/20' :
@@ -40,7 +40,7 @@ export default function RecentOrders() {
                     {order.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-[14px] font-medium text-[#F5F7FF]">{order.amount}</td>
+                <td className="px-6 py-4 text-[14px] font-medium text-foreground">{order.amount}</td>
               </tr>
             ))}
           </tbody>

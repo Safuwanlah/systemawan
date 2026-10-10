@@ -39,17 +39,17 @@ export default function SupplierPage() {
     <div className="space-y-6">
       <StaggerItem>
         {/* BREADCRUMB */}
-        <div className="flex items-center text-sm text-[#A7ADB4] mb-4">
+        <div className="flex items-center text-sm text-muted-foreground mb-4">
           <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-[#F5F5F5] font-medium">Supplier</span>
+          <span className="text-foreground font-medium">Supplier</span>
         </div>
 
         {/* HEADER */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-[#F5F5F5]">Supplier</h1>
-            <p className="text-[#A7ADB4] text-sm mt-1">Kelola data supplier dan hubungan pembelian sparepart.</p>
+            <h1 className="text-2xl font-bold text-foreground">Supplier</h1>
+            <p className="text-muted-foreground text-sm mt-1">Kelola data supplier dan hubungan pembelian sparepart.</p>
           </div>
           <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="inline-flex items-center gap-2 px-4 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#080A1F] focus:ring-[#E53935]">
             <Plus className="w-5 h-5" />
@@ -61,20 +61,20 @@ export default function SupplierPage() {
       {/* STATS */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <StaggerItem>
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
-            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Total Supplier</p>
+          <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-muted-foreground mb-1">Total Supplier</p>
             <p className="text-2xl font-black text-white">{stats.total}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
-            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Supplier Aktif</p>
+          <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-muted-foreground mb-1">Supplier Aktif</p>
             <p className="text-2xl font-black text-[#22C55E]">{stats.aktif}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
-          <div className="bg-[#171A1D] border border-[#292D32] rounded-xl p-4 shadow-lg h-full">
-            <p className="text-xs font-medium text-[#A7ADB4] mb-1">Supplier Tidak Aktif</p>
+          <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
+            <p className="text-xs font-medium text-muted-foreground mb-1">Supplier Tidak Aktif</p>
             <p className="text-2xl font-black text-[#EF4444]">{stats.tidakAktif}</p>
           </div>
         </StaggerItem>
@@ -82,25 +82,25 @@ export default function SupplierPage() {
 
       {/* MAIN CONTENT */}
       <StaggerItem>
-        <div className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-xl overflow-hidden">
-          <div className="p-4 border-b border-[#292D32] flex flex-col md:flex-row gap-4 justify-between items-center bg-[#0F1113]">
+        <div className="bg-card border border-border rounded-xl shadow-xl overflow-hidden">
+          <div className="p-4 border-b border-border flex flex-col md:flex-row gap-4 justify-between items-center bg-muted">
             <div className="relative w-full md:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A7ADB4]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input 
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari kode, nama, atau kontak..." 
-                className="w-full pl-9 pr-4 py-2 bg-[#171A1D] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all"
+                className="w-full pl-9 pr-4 py-2 bg-card text-sm text-foreground border border-border rounded-lg focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all"
               />
             </div>
-            <div className="flex gap-2 p-1 bg-[#0F1113] border border-[#292D32] rounded-lg">
+            <div className="flex gap-2 p-1 bg-muted border border-border rounded-lg">
               {['Semua', 'Aktif', 'Tidak Aktif'].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setStatusFilter(tab)}
                   className={`px-4 py-1.5 text-sm font-bold rounded-md transition-colors ${
-                    statusFilter === tab ? 'bg-[#25292D] text-white shadow-sm' : 'text-[#A7ADB4] hover:text-white'
+                    statusFilter === tab ? 'bg-accent text-white shadow-sm' : 'text-muted-foreground hover:text-white'
                   }`}
                 >
                   {tab}
@@ -114,12 +114,12 @@ export default function SupplierPage() {
               <div className="flex flex-col items-center justify-center py-16">
                 <Truck className="w-16 h-16 text-[#292D32] mb-4" />
                 <p className="text-white font-bold text-lg mb-1">Belum ada data</p>
-                <p className="text-[#A7ADB4] text-sm mb-4">Belum ada supplier yang terdaftar atau sesuai pencarian.</p>
-                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-[#25292D] text-white text-sm rounded-md hover:bg-[#292D32]">+ Tambah Supplier</button>
+                <p className="text-muted-foreground text-sm mb-4">Belum ada supplier yang terdaftar atau sesuai pencarian.</p>
+                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-accent text-white text-sm rounded-md hover:bg-accent">+ Tambah Supplier</button>
               </div>
             ) : (
               <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-[#0F1113] border-b border-[#292D32] text-[#A7ADB4]">
+                <thead className="bg-muted border-b border-border text-muted-foreground">
                   <tr>
                     <th className="px-6 py-4 font-bold">KODE</th>
                     <th className="px-6 py-4 font-bold">NAMA SUPPLIER</th>
@@ -143,13 +143,13 @@ export default function SupplierPage() {
                           exit={{ opacity: 0, scale: 0.95 }}
                           transition={{ duration: 0.2 }}
                           key={sp.id} 
-                          className="hover:bg-[#25292D]/30 transition-colors group"
+                          className="hover:bg-accent/30 transition-colors group"
                         >
-                          <td className="px-6 py-4 font-medium text-[#F5F5F5]">{sp.code}</td>
+                          <td className="px-6 py-4 font-medium text-foreground">{sp.code}</td>
                           <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
-                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.contact}</td>
-                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.phone}</td>
-                          <td className="px-6 py-4 text-[#A7ADB4]">{sp.email}</td>
+                          <td className="px-6 py-4 text-muted-foreground">{sp.contact}</td>
+                          <td className="px-6 py-4 text-muted-foreground">{sp.phone}</td>
+                          <td className="px-6 py-4 text-muted-foreground">{sp.email}</td>
                           <td className="px-6 py-4 text-center font-bold text-white">{itemsCount}</td>
                           <td className="px-6 py-4 text-center">
                             <span className={`px-2.5 py-1 text-xs font-bold rounded ${sp.status === 'Aktif' ? 'bg-[#22C55E]/10 text-[#22C55E]' : 'bg-[#EF4444]/10 text-[#EF4444]'}`}>
@@ -158,9 +158,9 @@ export default function SupplierPage() {
                           </td>
                           <td className="px-6 py-4 text-right">
                             <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button className="p-1.5 text-[#A7ADB4] hover:text-white bg-[#25292D] rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
-                              <button onClick={() => { setEditingData(sp); setIsModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#3B82F6] bg-[#25292D] rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
-                              <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-[#A7ADB4] hover:text-[#EF4444] bg-[#25292D] rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
+                              <button className="p-1.5 text-muted-foreground hover:text-white bg-accent rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
+                              <button onClick={() => { setEditingData(sp); setIsModalOpen(true); }} className="p-1.5 text-muted-foreground hover:text-[#3B82F6] bg-accent rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
+                              <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-muted-foreground hover:text-[#EF4444] bg-accent rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
                             </div>
                           </td>
                         </motion.tr>
@@ -183,7 +183,7 @@ export default function SupplierPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-[#080A1F]/80 backdrop-blur-sm"
+              className="absolute inset-0 bg-background/80 backdrop-blur-sm"
               onClick={() => { setIsModalOpen(false); setEditingData(null); }}
             />
             <motion.div 
@@ -191,40 +191,40 @@ export default function SupplierPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: "spring", duration: 0.4, bounce: 0 }}
-              className="bg-[#171A1D] border border-[#292D32] rounded-xl shadow-2xl w-full max-w-lg overflow-hidden relative z-10"
+              className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-lg overflow-hidden relative z-10"
             >
-              <div className="px-6 py-4 border-b border-[#292D32] flex justify-between items-center bg-[#0F1113]">
+              <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-muted">
                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                   <Truck className="w-5 h-5 text-[#E53935]" />
                   {editingData ? 'Edit Supplier' : 'Tambah Supplier'}
                 </h2>
-                <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-[#A7ADB4] hover:text-white transition-colors p-1 hover:bg-[#25292D] rounded-md"><X className="w-5 h-5"/></button>
+                <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-muted-foreground hover:text-white transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
               </div>
               <form onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); setEditingData(null); alert('Supplier disimpan (demo)'); }} className="p-6">
                 <div className="space-y-4 mb-4">
                   <div>
-                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kode Supplier *</label>
-                    <input type="text" defaultValue={editingData?.code} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">Kode Supplier *</label>
+                    <input type="text" defaultValue={editingData?.code} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Nama Supplier *</label>
-                    <input type="text" defaultValue={editingData?.name} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">Nama Supplier *</label>
+                    <input type="text" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Kontak Person *</label>
-                    <input type="text" defaultValue={editingData?.contact} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">Kontak Person *</label>
+                    <input type="text" defaultValue={editingData?.contact} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Telepon *</label>
-                    <input type="text" defaultValue={editingData?.phone} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">Telepon *</label>
+                    <input type="text" defaultValue={editingData?.phone} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-[#A7ADB4] mb-1">Email *</label>
-                    <input type="email" defaultValue={editingData?.email} required className="w-full bg-[#0F1113] border border-[#292D32] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <label className="block text-sm font-medium text-muted-foreground mb-1">Email *</label>
+                    <input type="email" defaultValue={editingData?.email} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                 </div>
-                <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-[#292D32]">
-                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-[#A7ADB4] hover:text-white font-medium transition-colors hover:bg-[#25292D] rounded-lg">Batal</button>
+                <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-border">
+                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-muted-foreground hover:text-white font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
                   <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>
                 </div>
               </form>

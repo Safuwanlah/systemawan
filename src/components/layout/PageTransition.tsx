@@ -1,9 +1,9 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
-const pageVariants = {
+const pageVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   show: { 
     opacity: 1, 

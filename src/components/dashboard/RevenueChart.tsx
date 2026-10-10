@@ -19,13 +19,13 @@ const data = [
 
 export default function RevenueChart() {
   return (
-    <div className="bg-[#151832] border border-[#252946] rounded-xl p-6 shadow-sm flex flex-col h-full">
+    <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-[#F5F7FF] font-semibold text-[16px]">Yearly Stats</h3>
-          <p className="text-[24px] font-bold text-[#F5F7FF] mt-1">$245,479</p>
+          <h3 className="text-foreground font-semibold text-[16px]">Yearly Stats</h3>
+          <p className="text-[24px] font-bold text-foreground mt-1">$245,479</p>
         </div>
-        <select className="bg-[#11142B] border border-[#252946] text-[#858BA8] text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
+        <select className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
           <option>Yearly</option>
           <option>Monthly</option>
           <option>Weekly</option>

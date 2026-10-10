@@ -44,12 +44,12 @@ export default function LogoutModal({ isOpen, onClose }: LogoutModalProps) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
       {/* Blurred Overlay */}
       <div 
-        className="absolute inset-0 bg-[#0F1113]/60 backdrop-blur-[4px] transition-all animate-in fade-in duration-300"
+        className="absolute inset-0 bg-muted/60 backdrop-blur-[4px] transition-all animate-in fade-in duration-300"
         onClick={onClose}
       ></div>
 
       {/* Modal Card */}
-      <div className="relative z-10 w-full max-w-[420px] bg-[#1B1F23] border border-[#292D32] rounded-2xl p-8 shadow-[0_0_40px_rgba(229,57,53,0.08)] mx-4 animate-in fade-in zoom-in-95 duration-300 before:absolute before:inset-0 before:rounded-2xl before:border before:border-white/5 before:pointer-events-none">
+      <div className="relative z-10 w-full max-w-[420px] bg-[#1B1F23] border border-border rounded-2xl p-8 shadow-[0_0_40px_rgba(229,57,53,0.08)] mx-4 animate-in fade-in zoom-in-95 duration-300 before:absolute before:inset-0 before:rounded-2xl before:border before:border-white/5 before:pointer-events-none">
         
         {/* Subtle top border highlight */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#E53935] to-transparent opacity-60 shadow-[0_0_10px_rgba(229,57,53,0.8)]"></div>

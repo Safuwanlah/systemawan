@@ -19,12 +19,12 @@ const data = [
 
 export default function OrdersChart() {
   return (
-    <div className="bg-[#151832] border border-[#252946] rounded-xl p-6 shadow-sm flex flex-col h-full">
+    <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-[#F5F7FF] font-semibold text-[16px]">Sales/Revenue</h3>
+          <h3 className="text-foreground font-semibold text-[16px]">Sales/Revenue</h3>
         </div>
-        <select className="bg-[#11142B] border border-[#252946] text-[#858BA8] text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
+        <select className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
           <option>Yearly</option>
           <option>Monthly</option>
           <option>Weekly</option>

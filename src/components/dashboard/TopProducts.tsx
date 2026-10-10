@@ -8,21 +8,21 @@ export default function TopProducts() {
   ];
 
   return (
-    <div className="bg-[#151832] border border-[#252946] rounded-xl shadow-sm overflow-hidden h-full">
-      <div className="px-6 py-5 border-b border-[#252946]">
-        <h3 className="font-semibold text-[#F5F7FF] text-[16px]">Top Products</h3>
+    <div className="bg-accent border border-border rounded-xl shadow-sm overflow-hidden h-full">
+      <div className="px-6 py-5 border-b border-border">
+        <h3 className="font-semibold text-foreground text-[16px]">Top Products</h3>
       </div>
       <div className="p-6 flex flex-col gap-5">
         {products.map((product, index) => (
           <div key={product.id} className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <span className="text-[#858BA8] font-bold text-[13px] w-4">{index + 1}.</span>
+              <span className="text-muted-foreground font-bold text-[13px] w-4">{index + 1}.</span>
               <div className="flex flex-col">
-                <span className="text-[14px] font-medium text-[#F5F7FF]">{product.name}</span>
-                <span className="text-[12px] text-[#858BA8]">{product.sales} sales</span>
+                <span className="text-[14px] font-medium text-foreground">{product.name}</span>
+                <span className="text-[12px] text-muted-foreground">{product.sales} sales</span>
               </div>
             </div>
-            <span className="text-[14px] font-semibold text-[#F5F7FF]">{product.revenue}</span>
+            <span className="text-[14px] font-semibold text-foreground">{product.revenue}</span>
           </div>
         ))}
       </div>

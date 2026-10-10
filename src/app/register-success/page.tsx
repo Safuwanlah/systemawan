@@ -5,7 +5,7 @@ import { Wrench, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export default function RegisterSuccessPage() {
   return (
-    <div className="min-h-screen bg-[#0F1113] text-[#F5F5F5] font-sans selection:bg-[#E53935] selection:text-white flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-muted text-foreground font-sans selection:bg-[#E53935] selection:text-white flex flex-col relative overflow-hidden">
       
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
@@ -16,7 +16,7 @@ export default function RegisterSuccessPage() {
       {/* Header */}
       <header className="relative z-10 w-full px-6 py-6">
         <Link href="/" className="inline-flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded bg-[#171A1D] border border-[#25292D] flex items-center justify-center shadow-inner group-hover:border-[#E53935]/50 transition-colors">
+          <div className="w-10 h-10 rounded bg-card border border-[#25292D] flex items-center justify-center shadow-inner group-hover:border-[#E53935]/50 transition-colors">
             <Wrench className="w-5 h-5 text-[#E53935]" />
           </div>
           <span className="font-bold text-lg tracking-wide text-white">GARASI INVENTORY</span>
@@ -27,7 +27,7 @@ export default function RegisterSuccessPage() {
       <main className="flex-1 flex items-center justify-center p-4 relative z-10">
         
         {/* Success Modal */}
-        <div className="w-full max-w-[500px] bg-[#171A1D] border border-[#25292D] rounded-3xl p-10 text-center shadow-[0_0_60px_rgba(16,185,129,0.15)] relative before:absolute before:inset-0 before:rounded-3xl before:border before:border-white/5 before:pointer-events-none transition-shadow duration-500 hover:shadow-[0_0_80px_rgba(16,185,129,0.2)]">
+        <div className="w-full max-w-[500px] bg-card border border-[#25292D] rounded-3xl p-10 text-center shadow-[0_0_60px_rgba(16,185,129,0.15)] relative before:absolute before:inset-0 before:rounded-3xl before:border before:border-white/5 before:pointer-events-none transition-shadow duration-500 hover:shadow-[0_0_80px_rgba(16,185,129,0.2)]">
           
           {/* Subtle top border highlight */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-70 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
@@ -42,10 +42,10 @@ export default function RegisterSuccessPage() {
           </h1>
           
           <div className="space-y-4 mb-10">
-            <p className="text-[#A7ADB4] text-[15px] leading-relaxed">
+            <p className="text-muted-foreground text-[15px] leading-relaxed">
               Selamat! Akun Garasi Inventory Anda telah dibuat dengan email: <span className="text-white font-semibold">budi.sukses@garasi.id</span>.
             </p>
-            <p className="text-[#A7ADB4] text-[15px] leading-relaxed">
+            <p className="text-muted-foreground text-[15px] leading-relaxed">
               Sekarang, silakan gunakan kredensial tersebut untuk masuk dan mulai mengelola stok bengkel Anda.
             </p>
           </div>

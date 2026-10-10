@@ -38,31 +38,31 @@ export default function StokOpnamePage() {
     <div className="animate-in fade-in p-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div>
-          <h2 className="text-xl font-bold text-[#F5F5F5]">Stok Opname</h2>
-          <p className="text-[#A7ADB4] text-sm">Cek dan sesuaikan stok fisik dengan stok sistem.</p>
+          <h2 className="text-xl font-bold text-foreground">Stok Opname</h2>
+          <p className="text-muted-foreground text-sm">Cek dan sesuaikan stok fisik dengan stok sistem.</p>
         </div>
         <div className="relative w-full md:w-80">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A7ADB4]" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input 
             type="text" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari sparepart..." 
-            className="w-full pl-9 pr-4 py-2 bg-[#0F1113] text-sm text-[#F5F5F5] border border-[#292D32] rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
+            className="w-full pl-9 pr-4 py-2 bg-muted text-sm text-foreground border border-border rounded-lg focus:outline-none focus:border-[#E53935] transition-colors"
           />
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-[#292D32] rounded-lg">
+      <div className="overflow-x-auto border border-border rounded-lg">
         {filteredSpareparts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 bg-[#171A1D]">
+          <div className="flex flex-col items-center justify-center py-20 bg-card">
             <Package className="w-16 h-16 text-[#292D32] mb-4" />
-            <p className="text-[#F5F5F5] font-bold text-lg mb-1">Tidak ada data</p>
-            <p className="text-[#A7ADB4] text-sm mb-4">Sparepart yang Anda cari tidak ditemukan.</p>
+            <p className="text-foreground font-bold text-lg mb-1">Tidak ada data</p>
+            <p className="text-muted-foreground text-sm mb-4">Sparepart yang Anda cari tidak ditemukan.</p>
           </div>
         ) : (
-          <table className="w-full text-left text-sm whitespace-nowrap bg-[#171A1D]">
-            <thead className="bg-[#0F1113] border-b border-[#292D32] text-[#A7ADB4]">
+          <table className="w-full text-left text-sm whitespace-nowrap bg-card">
+            <thead className="bg-muted border-b border-border text-muted-foreground">
               <tr>
                 <th className="px-6 py-4 font-bold">KODE</th>
                 <th className="px-6 py-4 font-bold">SPAREPART</th>
@@ -81,10 +81,10 @@ export default function StokOpnamePage() {
                 const diff = hasInput ? physicalVal - sp.stock : 0;
                 
                 return (
-                  <tr key={sp.id} className="hover:bg-[#25292D]/30 transition-colors">
-                    <td className="px-6 py-4 text-[#F5F5F5] font-medium">{sp.code}</td>
-                    <td className="px-6 py-4 text-[#F5F5F5] font-bold">{sp.name}</td>
-                    <td className="px-6 py-4 text-center font-bold text-[#A7ADB4]">{sp.stock} {sp.unit}</td>
+                  <tr key={sp.id} className="hover:bg-accent/30 transition-colors">
+                    <td className="px-6 py-4 text-foreground font-medium">{sp.code}</td>
+                    <td className="px-6 py-4 text-foreground font-bold">{sp.name}</td>
+                    <td className="px-6 py-4 text-center font-bold text-muted-foreground">{sp.stock} {sp.unit}</td>
                     <td className="px-6 py-4 text-center">
                       <input 
                         type="number" 
@@ -92,12 +92,12 @@ export default function StokOpnamePage() {
                         placeholder={sp.stock.toString()}
                         value={physicalInput || ''}
                         onChange={(e) => handleStockChange(sp.id, e.target.value)}
-                        className="w-20 px-2 py-1 text-center bg-[#0F1113] border border-[#292D32] text-[#F5F5F5] rounded focus:outline-none focus:border-[#E53935]"
+                        className="w-20 px-2 py-1 text-center bg-muted border border-border text-foreground rounded focus:outline-none focus:border-[#E53935]"
                       />
                     </td>
                     <td className="px-6 py-4 text-center font-bold">
                       {hasInput ? (
-                        <span className={diff > 0 ? 'text-[#22C55E]' : diff < 0 ? 'text-[#EF4444]' : 'text-[#A7ADB4]'}>
+                        <span className={diff > 0 ? 'text-[#22C55E]' : diff < 0 ? 'text-[#EF4444]' : 'text-muted-foreground'}>
                           {diff > 0 ? `+${diff}` : diff}
                         </span>
                       ) : (
@@ -120,7 +120,7 @@ export default function StokOpnamePage() {
                         className={`px-4 py-1.5 rounded text-xs font-bold transition-colors ${
                           hasInput 
                             ? 'bg-[#3B82F6] hover:bg-[#2563EB] text-white' 
-                            : 'bg-[#25292D] text-[#A7ADB4] cursor-not-allowed'
+                            : 'bg-accent text-muted-foreground cursor-not-allowed'
                         }`}
                       >
                         Simpan

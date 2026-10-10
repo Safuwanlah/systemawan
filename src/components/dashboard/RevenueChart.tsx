@@ -48,7 +48,7 @@ export default function RevenueChart({ data: propData, totalValue = '$245,479' }
                 <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
             <XAxis 
               dataKey="name" 
               stroke="var(--muted-foreground)" 

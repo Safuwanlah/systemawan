@@ -11,6 +11,7 @@
   --card-foreground: #0f172a;
 
   --border: #e2e8f0;
+  --chart-grid: #f1f5f9;
   
   --muted: #f1f5f9;
   --muted-foreground: #475569;
@@ -37,6 +38,7 @@
   --card-foreground: #F5F7FF;
 
   --border: #252946;
+  --chart-grid: #1e213b;
   
   --muted: #151832;
   --muted-foreground: #858BA8;

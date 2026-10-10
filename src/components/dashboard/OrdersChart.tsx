@@ -41,7 +41,7 @@ export default function OrdersChart({ data: propData }: { data?: ChartData[] }) 
             data={data}
             margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" vertical={false} />
             <XAxis 
               dataKey="name" 
               stroke="var(--muted-foreground)" 

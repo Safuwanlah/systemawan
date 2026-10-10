@@ -2,28 +2,32 @@
 
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Jan', value: 185 },
-  { name: 'Feb', value: 210 },
-  { name: 'Mar', value: 198 },
-  { name: 'Apr', value: 235 },
-  { name: 'May', value: 220 },
-  { name: 'Jun', value: 268 },
-  { name: 'Jul', value: 251 },
-  { name: 'Aug', value: 285 },
-  { name: 'Sep', value: 302 },
-  { name: 'Oct', value: 291 },
-  { name: 'Nov', value: 335 },
-  { name: 'Dec', value: 378 },
-];
+interface ChartData {
+  name: string;
+  value: number;
+}
 
-export default function RevenueChart() {
+export default function RevenueChart({ data: propData, totalValue = '$245,479' }: { data?: ChartData[], totalValue?: string }) {
+  const data = propData || [
+    { name: 'Jan', value: 185 },
+    { name: 'Feb', value: 210 },
+    { name: 'Mar', value: 198 },
+    { name: 'Apr', value: 235 },
+    { name: 'May', value: 220 },
+    { name: 'Jun', value: 268 },
+    { name: 'Jul', value: 251 },
+    { name: 'Aug', value: 285 },
+    { name: 'Sep', value: 302 },
+    { name: 'Oct', value: 291 },
+    { name: 'Nov', value: 335 },
+    { name: 'Dec', value: 378 },
+  ];
   return (
     <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h3 className="text-foreground font-semibold text-[16px]">Yearly Stats</h3>
-          <p className="text-[24px] font-bold text-foreground mt-1">$245,479</p>
+          <p className="text-[24px] font-bold text-foreground mt-1">{totalValue}</p>
         </div>
         <select className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
           <option>Yearly</option>

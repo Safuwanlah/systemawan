@@ -118,7 +118,7 @@ export default function BarangMasukPage() {
       
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed top-6 right-6 bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 z-50 animate-in fade-in slide-in-from-top-5">
+        <div className="fixed top-6 right-6 bg-green-600 text-foreground px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 z-50 animate-in fade-in slide-in-from-top-5">
           <div className="bg-white/20 p-1 rounded-full"><Check className="w-4 h-4" /></div>
           <div>
             <p className="font-semibold text-sm">Berhasil!</p>
@@ -137,10 +137,10 @@ export default function BarangMasukPage() {
           <span className="text-gray-200 font-medium">Barang Masuk</span>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-2xl font-bold text-white">Transaksi Barang Masuk</h1>
+          <h1 className="text-2xl font-bold text-foreground">Transaksi Barang Masuk</h1>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors shadow-lg shadow-red-900/20"
+            className="bg-red-600 hover:bg-red-700 text-foreground px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors shadow-lg shadow-red-900/20"
           >
             <Plus className="w-4 h-4" />
             Catat Barang Masuk
@@ -159,11 +159,11 @@ export default function BarangMasukPage() {
         </div>
         <div className="bg-[#1e293b] border border-gray-800 rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-400 font-medium mb-1">Akumulasi Minggu Ini</p>
-          <h3 className="text-2xl font-bold text-white">{metrics.weekQty} <span className="text-sm font-normal text-gray-400">Items</span></h3>
+          <h3 className="text-2xl font-bold text-foreground">{metrics.weekQty} <span className="text-sm font-normal text-gray-400">Items</span></h3>
         </div>
         <div className="bg-[#1e293b] border border-gray-800 rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-400 font-medium mb-1">Total Nilai Masuk (Estimasi)</p>
-          <h3 className="text-2xl font-bold text-white">{formatRp(metrics.totalValue)}</h3>
+          <h3 className="text-2xl font-bold text-foreground">{formatRp(metrics.totalValue)}</h3>
         </div>
       </div>
 
@@ -177,19 +177,19 @@ export default function BarangMasukPage() {
               placeholder="Cari No. TRX atau Sparepart..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0f172a] border border-gray-700 text-sm rounded-lg pl-9 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white placeholder-gray-500 transition-colors"
+              className="w-full bg-[#0f172a] border border-gray-700 text-sm rounded-lg pl-9 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground placeholder-gray-500 transition-colors"
             />
           </div>
           <select 
             value={sourceFilter}
             onChange={(e) => setSourceFilter(e.target.value)}
-            className="bg-[#0f172a] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white w-full sm:w-auto"
+            className="bg-[#0f172a] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground w-full sm:w-auto"
           >
             <option value="Semua">Semua Sumber</option>
             {SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
-        <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-white bg-[#0f172a] border border-gray-700 px-4 py-2.5 rounded-lg transition-colors w-full md:w-auto justify-center">
+        <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-foreground bg-[#0f172a] border border-gray-700 px-4 py-2.5 rounded-lg transition-colors w-full md:w-auto justify-center">
           <Download className="w-4 h-4" />
           Export Data
         </button>
@@ -217,7 +217,7 @@ export default function BarangMasukPage() {
                 filteredData.map((row) => (
                   <tr key={row.id} className="hover:bg-gray-800/30 transition-colors">
                     <td className="px-6 py-4 text-gray-300">{row.date}</td>
-                    <td className="px-6 py-4 font-medium text-white">{row.id}</td>
+                    <td className="px-6 py-4 font-medium text-foreground">{row.id}</td>
                     <td className="px-6 py-4 font-medium text-gray-200">{row.sparepart}</td>
                     <td className="px-6 py-4 text-gray-400">{row.category}</td>
                     <td className="px-6 py-4 text-center">
@@ -253,8 +253,8 @@ export default function BarangMasukPage() {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-[#1e293b] border border-gray-700 rounded-2xl w-full max-w-lg flex flex-col max-h-[90vh] shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-6 border-b border-gray-800">
-              <h2 className="text-xl font-bold text-white">{editingId ? 'Edit Barang Masuk' : 'Catat Barang Masuk'}</h2>
-              <button onClick={closeModal} className="text-gray-400 hover:text-white transition-colors p-1 bg-gray-800 rounded-lg hover:bg-gray-700">
+              <h2 className="text-xl font-bold text-foreground">{editingId ? 'Edit Barang Masuk' : 'Catat Barang Masuk'}</h2>
+              <button onClick={closeModal} className="text-gray-400 hover:text-foreground transition-colors p-1 bg-gray-800 rounded-lg hover:bg-gray-700">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -268,7 +268,7 @@ export default function BarangMasukPage() {
                     required
                     value={form.source}
                     onChange={(e) => setForm({...form, source: e.target.value})}
-                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm"
+                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm"
                   >
                     {SOURCES.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
@@ -280,7 +280,7 @@ export default function BarangMasukPage() {
                     required
                     value={form.sparepartId}
                     onChange={(e) => setForm({...form, sparepartId: e.target.value})}
-                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm"
+                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm"
                   >
                     <option value="">-- Cari Sparepart --</option>
                     {SPAREPARTS.map(sp => (
@@ -300,7 +300,7 @@ export default function BarangMasukPage() {
                         required
                         value={form.qty}
                         onChange={(e) => setForm({...form, qty: parseInt(e.target.value) || 0})}
-                        className="w-full bg-[#0f172a] border border-gray-700 rounded-lg pl-8 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm"
+                        className="w-full bg-[#0f172a] border border-gray-700 rounded-lg pl-8 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm"
                       />
                     </div>
                   </div>
@@ -311,7 +311,7 @@ export default function BarangMasukPage() {
                       required
                       value={form.date}
                       onChange={(e) => setForm({...form, date: e.target.value})}
-                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-3 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm [color-scheme:dark]"
+                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-3 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm [color-scheme:dark]"
                     />
                   </div>
                 </div>
@@ -323,7 +323,7 @@ export default function BarangMasukPage() {
                     value={form.ref}
                     onChange={(e) => setForm({...form, ref: e.target.value})}
                     placeholder="Misal: PO-2026-001"
-                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm"
+                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm"
                   />
                 </div>
 
@@ -334,7 +334,7 @@ export default function BarangMasukPage() {
                     value={form.note}
                     onChange={(e) => setForm({...form, note: e.target.value})}
                     placeholder="Lokasi rak atau catatan khusus..."
-                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm resize-none"
+                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm resize-none"
                   ></textarea>
                 </div>
               </form>
@@ -344,14 +344,14 @@ export default function BarangMasukPage() {
               <button 
                 type="button" 
                 onClick={closeModal}
-                className="px-5 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                className="px-5 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-foreground hover:bg-gray-800 transition-colors"
               >
                 Batal
               </button>
               <button 
                 type="submit" 
                 form="inbound-form"
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-green-900/20 flex items-center gap-2"
+                className="bg-green-600 hover:bg-green-700 text-foreground px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-green-900/20 flex items-center gap-2"
               >
                 <Check className="w-4 h-4" /> {editingId ? 'Simpan Perubahan' : 'Konfirmasi Masuk'}
               </button>

@@ -32,7 +32,7 @@ export default function KontakPage() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Hubungi Kami</h1>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-foreground tracking-tight">Hubungi Kami</h1>
           <p className="text-slate-500 dark:text-slate-400 mt-2">
             Butuh bantuan teknis atau memiliki pertanyaan tentang System Awan? Tim support kami siap membantu.
           </p>
@@ -43,7 +43,7 @@ export default function KontakPage() {
         {/* Informasi Kontak Cards */}
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 transition-all hover:shadow-md">
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-6">Informasi Kontak</h3>
+            <h3 className="text-lg font-semibold text-slate-800 dark:text-foreground mb-6">Informasi Kontak</h3>
             
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -51,7 +51,7 @@ export default function KontakPage() {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-800 dark:text-white">Telepon</p>
+                  <p className="font-medium text-slate-800 dark:text-foreground">Telepon</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">+62 812 3456 7890</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Senin - Jumat, 08:00 - 17:00</p>
                 </div>
@@ -62,7 +62,7 @@ export default function KontakPage() {
                   <MessageCircle className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-800 dark:text-white">WhatsApp Support</p>
+                  <p className="font-medium text-slate-800 dark:text-foreground">WhatsApp Support</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">+62 812 9876 5432</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Fast response 24/7</p>
                 </div>
@@ -73,7 +73,7 @@ export default function KontakPage() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-800 dark:text-white">Email</p>
+                  <p className="font-medium text-slate-800 dark:text-foreground">Email</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">support@systemawan.com</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">Balasan max 1x24 jam</p>
                 </div>
@@ -84,7 +84,7 @@ export default function KontakPage() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <p className="font-medium text-slate-800 dark:text-white">Kantor Pusat</p>
+                  <p className="font-medium text-slate-800 dark:text-foreground">Kantor Pusat</p>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
                     Gedung Cyber 1, Lt. 12<br/>
                     Jl. Kuningan Barat Raya No.8<br/>
@@ -95,7 +95,7 @@ export default function KontakPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-sm p-6 text-white">
+          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-sm p-6 text-foreground">
             <div className="flex items-center gap-3 mb-4">
               <Clock className="w-6 h-6 text-blue-200" />
               <h3 className="text-lg font-semibold">Status Sistem</h3>
@@ -111,7 +111,7 @@ export default function KontakPage() {
         {/* Form Kirim Pesan */}
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">Kirim Pesan Bantuan</h3>
+            <h3 className="text-xl font-bold text-slate-800 dark:text-foreground mb-2">Kirim Pesan Bantuan</h3>
             <p className="text-slate-500 dark:text-slate-400 mb-8">
               Isi form di bawah ini dan jelaskan kendala atau pertanyaan Anda secara detail.
             </p>
@@ -136,7 +136,7 @@ export default function KontakPage() {
                     type="text" 
                     id="name" 
                     required
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-foreground"
                     placeholder="Masukkan nama Anda"
                   />
                 </div>
@@ -146,7 +146,7 @@ export default function KontakPage() {
                     type="email" 
                     id="email" 
                     required
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-foreground"
                     placeholder="nama@email.com"
                   />
                 </div>
@@ -158,7 +158,7 @@ export default function KontakPage() {
                   <input 
                     type="tel" 
                     id="phone" 
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-foreground"
                     placeholder="0812xxxxxx"
                   />
                 </div>
@@ -167,7 +167,7 @@ export default function KontakPage() {
                   <select 
                     id="category" 
                     required
-                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-foreground appearance-none cursor-pointer"
                   >
                     <option value="">Pilih kategori...</option>
                     <option value="technical">Kendala Teknis (Error/Bug)</option>
@@ -185,7 +185,7 @@ export default function KontakPage() {
                   type="text" 
                   id="subject" 
                   required
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-white"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all dark:text-foreground"
                   placeholder="Ringkasan masalah Anda"
                 />
               </div>
@@ -196,7 +196,7 @@ export default function KontakPage() {
                   id="message" 
                   rows={5}
                   required
-                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none dark:text-white"
+                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none dark:text-foreground"
                   placeholder="Jelaskan secara rinci kendala atau pertanyaan Anda..."
                 ></textarea>
               </div>
@@ -209,7 +209,7 @@ export default function KontakPage() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-foreground rounded-xl font-medium transition-all shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

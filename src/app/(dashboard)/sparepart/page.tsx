@@ -94,7 +94,7 @@ export default function SparepartPage() {
       <StaggerItem>
         {/* BREADCRUMB */}
         <div className="flex items-center text-sm text-muted-foreground mb-4">
-          <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
+          <Link href="/dashboard" className="hover:text-foreground transition-colors">Beranda</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
           <span className="text-foreground font-medium">Manajemen Sparepart</span>
         </div>
@@ -117,19 +117,19 @@ export default function SparepartPage() {
         <StaggerItem>
           <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
             <p className="text-xs font-medium text-muted-foreground mb-1">Total Sparepart</p>
-            <p className="text-2xl font-black text-white">{stats.total}</p>
+            <p className="text-2xl font-black text-foreground">{stats.total}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
           <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
             <p className="text-xs font-medium text-muted-foreground mb-1">Kategori</p>
-            <p className="text-2xl font-black text-white">{stats.categories}</p>
+            <p className="text-2xl font-black text-foreground">{stats.categories}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
           <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
             <p className="text-xs font-medium text-muted-foreground mb-1">Merek</p>
-            <p className="text-2xl font-black text-white">{stats.mereks}</p>
+            <p className="text-2xl font-black text-foreground">{stats.mereks}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
@@ -167,10 +167,10 @@ export default function SparepartPage() {
           <div className="overflow-x-auto">
             {filteredSpareparts.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <Package className="w-16 h-16 text-[#292D32] mb-4" />
-                <p className="text-white font-bold text-lg mb-1">Belum ada data</p>
+                <Package className="w-16 h-16 text-muted-foreground/50 mb-4" />
+                <p className="text-foreground font-bold text-lg mb-1">Belum ada data</p>
                 <p className="text-muted-foreground text-sm mb-4">Belum ada sparepart yang terdaftar.</p>
-                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-accent text-white text-sm rounded-md hover:bg-accent">+ Tambah Sparepart</button>
+                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-accent text-foreground text-sm rounded-md hover:bg-accent">+ Tambah Sparepart</button>
               </div>
             ) : (
               <table className="w-full text-left text-sm whitespace-nowrap">
@@ -184,7 +184,7 @@ export default function SparepartPage() {
                     <th className="px-6 py-4 font-bold text-right">AKSI</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#292D32]">
+                <tbody className="divide-y divide-border">
                   <AnimatePresence mode="popLayout">
                     {filteredSpareparts.map(sp => (
                       <motion.tr 
@@ -196,7 +196,7 @@ export default function SparepartPage() {
                         key={sp.id} 
                         className="hover:bg-accent/30 transition-colors group"
                       >
-                        <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                        <td className="px-6 py-4 font-bold text-foreground">{sp.name}</td>
                         <td className="px-6 py-4 text-muted-foreground">{sp.merek}</td>
                         <td className="px-6 py-4 text-right text-muted-foreground">Rp {sp.hargaBeli.toLocaleString('id-ID')}</td>
                         <td className="px-6 py-4 text-right text-foreground font-medium">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
@@ -237,29 +237,29 @@ export default function SparepartPage() {
               className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden relative z-10"
             >
               <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-muted">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                   <Package className="w-5 h-5 text-[#E53935]" />
                   {editingData ? 'Edit Sparepart' : 'Tambah Sparepart Baru'}
                 </h2>
-                <button onClick={closeModal} className="text-muted-foreground hover:text-white transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
+                <button onClick={closeModal} className="text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
               </div>
               <form onSubmit={handleSubmit} className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Nama Sparepart *</label>
-                    <input type="text" name="name" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" name="name" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Kategori *</label>
-                    <input type="text" name="category" defaultValue={editingData?.category} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" name="category" defaultValue={editingData?.category} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Harga Beli *</label>
-                    <input type="number" name="hargaBeli" defaultValue={editingData?.hargaBeli} min="0" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="number" name="hargaBeli" defaultValue={editingData?.hargaBeli} min="0" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Harga Jual *</label>
-                    <input type="number" name="hargaJual" defaultValue={editingData?.hargaJual} min="0" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="number" name="hargaJual" defaultValue={editingData?.hargaJual} min="0" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                 </div>
 
@@ -287,23 +287,23 @@ export default function SparepartPage() {
                         )}
                         <div>
                           <label className="block text-sm font-medium text-muted-foreground mb-1">Merek</label>
-                          <input type="text" name="merek" defaultValue={editingData?.merek} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                          <input type="text" name="merek" defaultValue={editingData?.merek} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-muted-foreground mb-1">Satuan</label>
-                          <input type="text" name="unit" defaultValue={editingData?.unit || 'pcs'} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                          <input type="text" name="unit" defaultValue={editingData?.unit || 'pcs'} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-muted-foreground mb-1">Lokasi Rak</label>
-                          <input type="text" name="location" defaultValue={editingData?.location} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                          <input type="text" name="location" defaultValue={editingData?.location} placeholder="-" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-muted-foreground mb-1">Stok Minimum</label>
-                          <input type="number" name="minStock" defaultValue={editingData?.minStock || 5} min="1" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                          <input type="number" name="minStock" defaultValue={editingData?.minStock || 5} min="1" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-muted-foreground mb-1">Supplier Utama</label>
-                          <select name="supplierId" defaultValue={editingData?.supplierId || ""} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
+                          <select name="supplierId" defaultValue={editingData?.supplierId || ""} className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all">
                             <option value="">Pilih Supplier... (Opsional)</option>
                             {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
                           </select>
@@ -313,7 +313,7 @@ export default function SparepartPage() {
                   )}
                 </AnimatePresence>
                 <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-border">
-                  <button type="button" onClick={closeModal} className="px-4 py-2 text-muted-foreground hover:text-white font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
+                  <button type="button" onClick={closeModal} className="px-4 py-2 text-muted-foreground hover:text-foreground font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
                   <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>
                 </div>
               </form>
@@ -344,10 +344,10 @@ export default function SparepartPage() {
               <div className="w-16 h-16 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center mx-auto mb-4">
                 <AlertTriangle className="w-8 h-8 text-[#EF4444]" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Hapus Sparepart?</h3>
+              <h3 className="text-xl font-bold text-foreground mb-2">Hapus Sparepart?</h3>
               <p className="text-muted-foreground mb-6">Apakah Anda yakin ingin menghapus data sparepart ini? Tindakan ini tidak dapat dibatalkan.</p>
               <div className="flex gap-3 justify-center">
-                <button onClick={() => setIsDeleteModalOpen(false)} className="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent font-medium transition-colors">Batal</button>
+                <button onClick={() => setIsDeleteModalOpen(false)} className="px-6 py-2 bg-accent text-foreground rounded-lg hover:bg-accent font-medium transition-colors">Batal</button>
                 <button onClick={confirmDelete} className="px-6 py-2 bg-[#EF4444] text-white rounded-lg hover:bg-[#DC2626] font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#EF4444]">Ya, Hapus</button>
               </div>
             </motion.div>
@@ -359,7 +359,7 @@ export default function SparepartPage() {
       {notification && (
         <div className="fixed bottom-6 right-6 bg-[#22C55E] text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3 animate-in slide-in-from-bottom-5 fade-in duration-300 z-[200]">
           <div className="bg-white/20 p-1.5 rounded-full">
-            <Trash2 className="w-4 h-4 text-white" />
+            <Trash2 className="w-4 h-4 text-foreground" />
           </div>
           <span className="font-bold">{notification}</span>
           <button onClick={() => setNotification(null)} className="ml-2 hover:bg-white/20 p-1 rounded-full transition-colors">

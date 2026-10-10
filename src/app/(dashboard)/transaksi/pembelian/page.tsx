@@ -128,7 +128,7 @@ export default function PembelianPage() {
       
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed top-6 right-6 bg-green-600 text-white px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 z-50 animate-in fade-in slide-in-from-top-5">
+        <div className="fixed top-6 right-6 bg-green-600 text-foreground px-4 py-3 rounded-lg shadow-lg flex items-center gap-3 z-50 animate-in fade-in slide-in-from-top-5">
           <CheckCircle2 className="w-5 h-5" />
           <div>
             <p className="font-semibold text-sm">Berhasil!</p>
@@ -147,10 +147,10 @@ export default function PembelianPage() {
           <span className="text-gray-200 font-medium">Pembelian</span>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-2xl font-bold text-white">Pembelian Sparepart</h1>
+          <h1 className="text-2xl font-bold text-foreground">Pembelian Sparepart</h1>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors shadow-lg shadow-red-900/20"
+            className="bg-red-600 hover:bg-red-700 text-foreground px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm font-medium transition-colors shadow-lg shadow-red-900/20"
           >
             <Plus className="w-4 h-4" />
             Buat Pembelian Baru
@@ -163,7 +163,7 @@ export default function PembelianPage() {
         <div className="bg-[#1e293b] border border-gray-800 rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-400 font-medium mb-1">Total Pembelian Bulan Ini</p>
           <div className="flex items-end gap-3">
-            <h3 className="text-2xl font-bold text-white">{formatRp(metrics.total)}</h3>
+            <h3 className="text-2xl font-bold text-foreground">{formatRp(metrics.total)}</h3>
             <span className="text-sm text-gray-400 mb-1">({metrics.count} PO)</span>
           </div>
         </div>
@@ -187,13 +187,13 @@ export default function PembelianPage() {
               placeholder="Cari No. PO atau Supplier..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0f172a] border border-gray-700 text-sm rounded-lg pl-9 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white placeholder-gray-500 transition-colors"
+              className="w-full bg-[#0f172a] border border-gray-700 text-sm rounded-lg pl-9 pr-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground placeholder-gray-500 transition-colors"
             />
           </div>
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-[#0f172a] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white w-full sm:w-auto"
+            className="bg-[#0f172a] border border-gray-700 text-sm rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground w-full sm:w-auto"
           >
             <option value="Semua">Semua Status</option>
             <option value="Draft">Draft</option>
@@ -203,7 +203,7 @@ export default function PembelianPage() {
             <option value="Dibatalkan">Dibatalkan</option>
           </select>
         </div>
-        <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-white bg-[#0f172a] border border-gray-700 px-4 py-2.5 rounded-lg transition-colors w-full md:w-auto justify-center">
+        <button className="flex items-center gap-2 text-sm text-gray-400 hover:text-foreground bg-[#0f172a] border border-gray-700 px-4 py-2.5 rounded-lg transition-colors w-full md:w-auto justify-center">
           <Download className="w-4 h-4" />
           Export Excel
         </button>
@@ -229,10 +229,10 @@ export default function PembelianPage() {
                 filteredData.map((row) => (
                   <tr key={row.id} className="hover:bg-gray-800/30 transition-colors">
                     <td className="px-6 py-4 text-gray-300">{row.date}</td>
-                    <td className="px-6 py-4 font-medium text-white">{row.id}</td>
+                    <td className="px-6 py-4 font-medium text-foreground">{row.id}</td>
                     <td className="px-6 py-4 text-gray-300">{row.supplier}</td>
                     <td className="px-6 py-4 text-gray-300">{row.items} Pcs</td>
-                    <td className="px-6 py-4 font-medium text-white">{formatRp(row.total)}</td>
+                    <td className="px-6 py-4 font-medium text-foreground">{formatRp(row.total)}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium border
                         ${row.status === 'Selesai' ? 'bg-green-500/10 text-green-500 border-green-500/20' : 
@@ -245,7 +245,7 @@ export default function PembelianPage() {
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-center gap-3 text-gray-400">
                         <button onClick={() => handleEdit(row)} className="hover:text-blue-400 transition-colors" title="Edit"><FileText className="w-4 h-4" /></button>
-                        <button className="hover:text-white transition-colors" title="Cetak"><Printer className="w-4 h-4" /></button>
+                        <button className="hover:text-foreground transition-colors" title="Cetak"><Printer className="w-4 h-4" /></button>
                         <button className="hover:text-red-400 transition-colors" title="Batalkan"><XCircle className="w-4 h-4" /></button>
                       </div>
                     </td>
@@ -272,8 +272,8 @@ export default function PembelianPage() {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-[#1e293b] border border-gray-700 rounded-2xl w-full max-w-3xl flex flex-col max-h-[90vh] shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-6 border-b border-gray-800">
-              <h2 className="text-xl font-bold text-white">{editingId ? 'Edit Pembelian' : 'Buat Pembelian Baru (PO)'}</h2>
-              <button onClick={closeModal} className="text-gray-400 hover:text-white transition-colors p-1 bg-gray-800 rounded-lg hover:bg-gray-700">
+              <h2 className="text-xl font-bold text-foreground">{editingId ? 'Edit Pembelian' : 'Buat Pembelian Baru (PO)'}</h2>
+              <button onClick={closeModal} className="text-gray-400 hover:text-foreground transition-colors p-1 bg-gray-800 rounded-lg hover:bg-gray-700">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -288,7 +288,7 @@ export default function PembelianPage() {
                       required
                       value={form.supplier}
                       onChange={(e) => setForm({...form, supplier: e.target.value})}
-                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm"
+                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm"
                     >
                       <option value="">-- Pilih Supplier --</option>
                       {SUPPLIERS.map(s => <option key={s} value={s}>{s}</option>)}
@@ -301,7 +301,7 @@ export default function PembelianPage() {
                       required
                       value={form.date}
                       onChange={(e) => setForm({...form, date: e.target.value})}
-                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm [color-scheme:dark]"
+                      className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-2.5 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm [color-scheme:dark]"
                     />
                   </div>
                 </div>
@@ -322,7 +322,7 @@ export default function PembelianPage() {
                             required
                             value={item.sparepartId}
                             onChange={(e) => handleItemChange(index, 'sparepartId', e.target.value)}
-                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-white"
+                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-foreground"
                           >
                             <option value="">Pilih Sparepart</option>
                             {SPAREPARTS.map(sp => <option key={sp.id} value={sp.id}>{sp.id} - {sp.name}</option>)}
@@ -333,7 +333,7 @@ export default function PembelianPage() {
                             type="number" min="1" required
                             value={item.qty}
                             onChange={(e) => handleItemChange(index, 'qty', parseInt(e.target.value) || 0)}
-                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-white text-center"
+                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-foreground text-center"
                             placeholder="Qty"
                           />
                         </div>
@@ -342,7 +342,7 @@ export default function PembelianPage() {
                             type="number" min="0" required
                             value={item.price}
                             onChange={(e) => handleItemChange(index, 'price', parseInt(e.target.value) || 0)}
-                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-white text-right"
+                            className="w-full bg-[#1e293b] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-red-500 outline-none text-foreground text-right"
                             placeholder="Harga Satuan"
                           />
                         </div>
@@ -359,7 +359,7 @@ export default function PembelianPage() {
                   <div className="flex justify-end mt-4 pt-4 border-t border-gray-800">
                     <div className="text-right">
                       <p className="text-sm text-gray-400 mb-1">Total Estimasi Pembelian</p>
-                      <p className="text-2xl font-bold text-white">{formatRp(formTotal)}</p>
+                      <p className="text-2xl font-bold text-foreground">{formatRp(formTotal)}</p>
                     </div>
                   </div>
                 </div>
@@ -371,7 +371,7 @@ export default function PembelianPage() {
                     value={form.notes}
                     onChange={(e) => setForm({...form, notes: e.target.value})}
                     placeholder="Masukkan instruksi khusus atau estimasi kedatangan..."
-                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-white text-sm resize-none"
+                    className="w-full bg-[#0f172a] border border-gray-700 rounded-lg px-4 py-3 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-foreground text-sm resize-none"
                   ></textarea>
                 </div>
               </form>
@@ -381,14 +381,14 @@ export default function PembelianPage() {
               <button 
                 type="button" 
                 onClick={closeModal}
-                className="px-5 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors"
+                className="px-5 py-2.5 rounded-lg text-sm font-medium text-gray-300 hover:text-foreground hover:bg-gray-800 transition-colors"
               >
                 Batal
               </button>
               <button 
                 type="submit" 
                 form="po-form"
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-red-900/20 flex items-center gap-2"
+                className="bg-red-600 hover:bg-red-700 text-foreground px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-lg shadow-red-900/20 flex items-center gap-2"
               >
                 <Check className="w-4 h-4" /> Simpan PO
               </button>

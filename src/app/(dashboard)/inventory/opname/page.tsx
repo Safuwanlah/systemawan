@@ -56,7 +56,7 @@ export default function StokOpnamePage() {
       <div className="overflow-x-auto border border-border rounded-lg">
         {filteredSpareparts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 bg-card">
-            <Package className="w-16 h-16 text-[#292D32] mb-4" />
+            <Package className="w-16 h-16 text-muted-foreground/50 mb-4" />
             <p className="text-foreground font-bold text-lg mb-1">Tidak ada data</p>
             <p className="text-muted-foreground text-sm mb-4">Sparepart yang Anda cari tidak ditemukan.</p>
           </div>
@@ -73,7 +73,7 @@ export default function StokOpnamePage() {
                 <th className="px-6 py-4 font-bold text-right">AKSI</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#292D32]">
+            <tbody className="divide-y divide-border">
               {filteredSpareparts.map(sp => {
                 const physicalInput = physicalStocks[sp.id];
                 const hasInput = physicalInput !== undefined && physicalInput !== '';
@@ -101,7 +101,7 @@ export default function StokOpnamePage() {
                           {diff > 0 ? `+${diff}` : diff}
                         </span>
                       ) : (
-                        <span className="text-[#292D32]">-</span>
+                        <span className="text-muted-foreground/50">-</span>
                       )}
                     </td>
                     <td className="px-6 py-4">
@@ -110,7 +110,7 @@ export default function StokOpnamePage() {
                       ) : hasInput && diff === 0 ? (
                         <span className="text-xs px-2 py-1 rounded bg-[#22C55E]/10 text-[#22C55E]">Sesuai</span>
                       ) : (
-                        <span className="text-xs text-[#292D32]">-</span>
+                        <span className="text-xs text-muted-foreground/50">-</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-right">
@@ -119,7 +119,7 @@ export default function StokOpnamePage() {
                         onClick={() => handleSaveOpname(sp.id)}
                         className={`px-4 py-1.5 rounded text-xs font-bold transition-colors ${
                           hasInput 
-                            ? 'bg-[#3B82F6] hover:bg-[#2563EB] text-white' 
+                            ? 'bg-[#3B82F6] hover:bg-[#2563EB] text-foreground' 
                             : 'bg-accent text-muted-foreground cursor-not-allowed'
                         }`}
                       >

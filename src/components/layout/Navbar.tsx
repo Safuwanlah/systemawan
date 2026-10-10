@@ -92,7 +92,7 @@ export default function Navbar() {
               <Wrench className="w-5 h-5 text-[#E53935]" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-base md:text-lg tracking-wide leading-none text-white">GARASI INVENTORY</span>
+              <span className="font-bold text-base md:text-lg tracking-wide leading-none text-foreground">GARASI INVENTORY</span>
               <span className="text-[10px] md:text-xs text-[#8A9098] font-medium tracking-widest mt-1">SPAREPART MANAGEMENT</span>
             </div>
           </Link>
@@ -132,7 +132,7 @@ export default function Navbar() {
                       <Link 
                         key={dropItem.name} 
                         href={dropItem.path}
-                        className="block px-4 py-2.5 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors"
+                        className="block px-4 py-2.5 text-sm text-[#A1A7B0] hover:text-foreground hover:bg-accent/50 transition-colors"
                         onClick={() => setActiveDropdown(null)}
                       >
                         {dropItem.name}
@@ -191,7 +191,7 @@ export default function Navbar() {
                 <User className="w-4 h-4 text-[#A1A7B0]" />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-white leading-tight">Admin</span>
+                <span className="text-sm font-semibold text-foreground leading-tight">Admin</span>
                 <span className="text-[11px] text-[#8A9098] font-medium leading-tight">Administrator</span>
               </div>
               <ChevronDown className={`w-4 h-4 text-[#5A6068] transition-transform duration-200 ${activeDropdown === 'user' ? 'rotate-180' : ''}`} />
@@ -201,16 +201,16 @@ export default function Navbar() {
             {activeDropdown === 'user' && (
               <div className="absolute top-full right-0 mt-1 w-48 bg-[#1B1F23] border border-border rounded-md shadow-xl py-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="px-4 py-2 border-b border-border mb-1">
-                  <p className="text-sm font-medium text-white">Admin</p>
+                  <p className="text-sm font-medium text-foreground">Admin</p>
                   <p className="text-xs text-[#8A9098]">admin@garasi.id</p>
                 </div>
-                <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
+                <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-foreground hover:bg-accent/50 transition-colors">
                   <User className="w-4 h-4" /> Profil Saya
                 </Link>
-                <Link href="/settings" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
+                <Link href="/settings" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-foreground hover:bg-accent/50 transition-colors">
                   <Settings className="w-4 h-4" /> Pengaturan
                 </Link>
-                <Link href="/help" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-white hover:bg-accent/50 transition-colors">
+                <Link href="/help" className="flex items-center gap-2 px-4 py-2 text-sm text-[#A1A7B0] hover:text-foreground hover:bg-accent/50 transition-colors">
                   <HelpCircle className="w-4 h-4" /> Bantuan
                 </Link>
                 <div className="h-[1px] bg-[#292D32] my-1"></div>
@@ -229,7 +229,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 lg:hidden">
           <Link href="/notifikasi"
             aria-label="Notifications"
-            className="p-2 text-[#A1A7B0] hover:text-white relative"
+            className="p-2 text-[#A1A7B0] hover:text-foreground relative"
           >
             <Bell className="w-5 h-5" />
             {unreadCount > 0 && (

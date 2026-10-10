@@ -30,7 +30,7 @@ export default function LandingNavbar() {
           <div className="w-10 h-10 rounded bg-card border border-[#25292D] flex items-center justify-center group-hover:border-[#E53935]/50 transition-colors">
             <Wrench className="w-5 h-5 text-[#E53935]" />
           </div>
-          <span className="font-bold text-lg tracking-wide text-white">GARASI INVENTORY</span>
+          <span className="font-bold text-lg tracking-wide text-foreground">GARASI INVENTORY</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -39,7 +39,7 @@ export default function LandingNavbar() {
             <a 
               key={link.name} 
               href={link.path}
-              className="text-muted-foreground hover:text-white font-medium text-sm transition-colors"
+              className="text-muted-foreground hover:text-foreground font-medium text-sm transition-colors"
             >
               {link.name}
             </a>
@@ -48,7 +48,7 @@ export default function LandingNavbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
-          <Link href="/" className="text-sm font-bold text-white hover:text-[#E53935] transition-colors">
+          <Link href="/" className="text-sm font-bold text-foreground hover:text-[#E53935] transition-colors">
             Login
           </Link>
           <Link href="/" className="inline-flex justify-center items-center gap-2 px-5 py-2.5 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold text-sm rounded transition-all shadow-[0_0_15px_rgba(229,57,53,0.3)]">
@@ -59,7 +59,7 @@ export default function LandingNavbar() {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden p-2 text-muted-foreground hover:text-white"
+          className="md:hidden p-2 text-muted-foreground hover:text-foreground"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -73,14 +73,14 @@ export default function LandingNavbar() {
             <a 
               key={link.name} 
               href={link.path}
-              className="text-muted-foreground hover:text-white font-medium p-2"
+              className="text-muted-foreground hover:text-foreground font-medium p-2"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
           <div className="h-[1px] bg-accent my-2"></div>
-          <Link href="/" className="text-white font-medium p-2 text-center border border-[#25292D] rounded">
+          <Link href="/" className="text-foreground font-medium p-2 text-center border border-[#25292D] rounded">
             Login
           </Link>
           <Link href="/" className="bg-[#E53935] text-white font-bold p-2 text-center rounded">

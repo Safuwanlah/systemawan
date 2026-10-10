@@ -108,10 +108,10 @@ function SemuaSparepartContent() {
       <div className="overflow-x-auto">
         {filteredSpareparts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <Package className="w-16 h-16 text-[#292D32] mb-4" />
+            <Package className="w-16 h-16 text-muted-foreground/50 mb-4" />
             <p className="text-foreground font-bold text-lg mb-1">Belum ada data</p>
             <p className="text-muted-foreground text-sm mb-4">Tidak ada sparepart yang sesuai dengan filter Anda.</p>
-            <button onClick={() => { setSearchQuery(''); setCategoryFilter('Semua'); updateUrlStatus('Semua'); setSupplierFilter('Semua'); }} className="px-4 py-2 bg-accent text-white text-sm rounded-md hover:bg-accent">Reset Pencarian</button>
+            <button onClick={() => { setSearchQuery(''); setCategoryFilter('Semua'); updateUrlStatus('Semua'); setSupplierFilter('Semua'); }} className="px-4 py-2 bg-accent text-foreground text-sm rounded-md hover:bg-accent">Reset Pencarian</button>
           </div>
         ) : (
           <table className="w-full text-left text-sm whitespace-nowrap">
@@ -127,19 +127,19 @@ function SemuaSparepartContent() {
                 <th className="px-6 py-4 font-bold text-right">AKSI</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#292D32]">
+            <tbody className="divide-y divide-border">
               {filteredSpareparts.map(sp => (
                 <tr key={sp.id} className="hover:bg-accent/30 transition-colors group">
                   <td className="px-6 py-4 font-medium text-foreground">{sp.code}</td>
                   <td className="px-6 py-4 font-bold text-foreground">{sp.name}</td>
                   <td className="px-6 py-4"><span className="px-2.5 py-1 bg-accent text-muted-foreground rounded text-xs">{sp.category}</span></td>
-                  <td className="px-6 py-4 text-center font-black text-white">{sp.stock} <span className="text-xs font-normal text-muted-foreground">{sp.unit}</span></td>
+                  <td className="px-6 py-4 text-center font-black text-foreground">{sp.stock} <span className="text-xs font-normal text-muted-foreground">{sp.unit}</span></td>
                   <td className="px-6 py-4 text-muted-foreground">Rp {sp.hargaJual.toLocaleString('id-ID')}</td>
                   <td className="px-6 py-4 text-muted-foreground">{sp.supplierId}</td>
                   <td className="px-6 py-4">{renderStatusBadge(sp.stock, sp.minStock)}</td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="p-1.5 text-muted-foreground hover:text-white bg-accent rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
+                      <button className="p-1.5 text-muted-foreground hover:text-foreground bg-accent rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
                       <button className="p-1.5 text-muted-foreground hover:text-[#3B82F6] bg-accent rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
                     </div>
                   </td>
@@ -154,9 +154,9 @@ function SemuaSparepartContent() {
       <div className="border-t border-border p-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-sm text-muted-foreground">Menampilkan 1–{filteredSpareparts.length} dari {spareparts.length} sparepart</p>
         <div className="flex gap-2">
-          <button className="px-3 py-1.5 bg-accent text-muted-foreground rounded hover:text-white transition-colors">&lt;</button>
+          <button className="px-3 py-1.5 bg-accent text-muted-foreground rounded hover:text-foreground transition-colors">&lt;</button>
           <button className="px-3 py-1.5 bg-[#E53935] text-white rounded font-bold">1</button>
-          <button className="px-3 py-1.5 bg-accent text-muted-foreground rounded hover:text-white transition-colors">&gt;</button>
+          <button className="px-3 py-1.5 bg-accent text-muted-foreground rounded hover:text-foreground transition-colors">&gt;</button>
         </div>
       </div>
     </div>

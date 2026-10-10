@@ -57,10 +57,10 @@ export default function LogoutModal({ isOpen, onClose }: LogoutModalProps) {
         <div className="text-center">
           {/* Icon */}
           <div className="mx-auto w-16 h-16 rounded-full bg-[#E53935] flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(229,57,53,0.4)] border border-[#FF6B6B]/30">
-            <LogOut className="w-8 h-8 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
+            <LogOut className="w-8 h-8 text-foreground drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
           </div>
 
-          <h2 className="text-2xl font-bold text-white mb-2">Konfirmasi Keluar</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-2">Konfirmasi Keluar</h2>
           <p className="text-[#A1A7B0] text-[15px] leading-relaxed mb-8">
             Apakah Anda yakin ingin keluar dari akun Garasi Inventory Anda?
           </p>
@@ -69,7 +69,7 @@ export default function LogoutModal({ isOpen, onClose }: LogoutModalProps) {
           <div className="flex gap-4 w-full">
             <button 
               onClick={onClose}
-              className="flex-1 bg-[#292D32] hover:bg-[#343A40] text-white py-3.5 px-4 rounded-xl font-semibold text-[15px] transition-all border border-[#40464D]"
+              className="flex-1 bg-[#292D32] hover:bg-[#343A40] text-foreground py-3.5 px-4 rounded-xl font-semibold text-[15px] transition-all border border-[#40464D]"
             >
               Batal
             </button>

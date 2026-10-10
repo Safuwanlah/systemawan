@@ -26,7 +26,7 @@ export default function NotifikasiPage() {
   return (
     <div className="space-y-6 animate-in fade-in max-w-4xl mx-auto">
       <div className="flex items-center text-sm text-muted-foreground">
-        <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
+        <Link href="/dashboard" className="hover:text-foreground transition-colors">Beranda</Link>
         <ChevronRight className="w-4 h-4 mx-2" />
         <span className="text-foreground font-medium">Notifikasi Stok</span>
       </div>
@@ -38,7 +38,7 @@ export default function NotifikasiPage() {
         </div>
         <button 
           onClick={markAllNotificationsRead}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-card hover:bg-accent text-muted-foreground hover:text-white font-medium rounded-lg border border-border transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-card hover:bg-accent text-muted-foreground hover:text-foreground font-medium rounded-lg border border-border transition-colors"
         >
           <CheckCircle2 className="w-4 h-4" />
           Tandai Semua Dibaca
@@ -52,7 +52,7 @@ export default function NotifikasiPage() {
               key={tab}
               onClick={() => setTabFilter(tab)}
               className={`px-4 py-1.5 text-sm font-bold rounded-md transition-colors ${
-                tabFilter === tab ? 'bg-accent text-white shadow-sm' : 'text-muted-foreground hover:text-white'
+                tabFilter === tab ? 'bg-accent text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {tab}
@@ -60,11 +60,11 @@ export default function NotifikasiPage() {
           ))}
         </div>
 
-        <div className="divide-y divide-[#292D32]">
+        <div className="divide-y divide-border">
           {filteredNotifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20">
-              <Bell className="w-16 h-16 text-[#292D32] mb-4" />
-              <p className="text-white font-bold text-lg mb-1">Tidak ada notifikasi baru</p>
+              <Bell className="w-16 h-16 text-muted-foreground/50 mb-4" />
+              <p className="text-foreground font-bold text-lg mb-1">Tidak ada notifikasi baru</p>
               <p className="text-muted-foreground text-sm">Semua stok berada dalam kondisi aman.</p>
             </div>
           ) : (
@@ -77,7 +77,7 @@ export default function NotifikasiPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className={`font-bold ${!notif.read ? 'text-white' : 'text-muted-foreground'}`}>{notif.title}</h3>
+                      <h3 className={`font-bold ${!notif.read ? 'text-foreground' : 'text-muted-foreground'}`}>{notif.title}</h3>
                       <span className="text-xs text-[#737A82]">{new Date(notif.date).toLocaleDateString('id-ID', { hour: '2-digit', minute:'2-digit'})}</span>
                     </div>
                     <p className={`text-sm mb-4 ${!notif.read ? 'text-foreground' : 'text-[#737A82]'}`}>{notif.message}</p>
@@ -91,7 +91,7 @@ export default function NotifikasiPage() {
                       {!notif.read && (
                         <button 
                           onClick={() => markNotificationRead(notif.id)}
-                          className="px-4 py-1.5 bg-card border border-border hover:bg-accent text-muted-foreground hover:text-white text-xs font-bold rounded transition-colors"
+                          className="px-4 py-1.5 bg-card border border-border hover:bg-accent text-muted-foreground hover:text-foreground text-xs font-bold rounded transition-colors"
                         >
                           Tandai Dibaca
                         </button>

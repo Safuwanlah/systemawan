@@ -1,5 +1,12 @@
-export default function TopProducts() {
-  const products = [
+interface TopProduct {
+  id: string | number;
+  name: string;
+  sales: string;
+  revenue: string;
+}
+
+export default function TopProducts({ data }: { data?: TopProduct[] }) {
+  const products = data || [
     { id: 1, name: 'Product Alpha', sales: '1,284', revenue: 'Rp 48.2M' },
     { id: 2, name: 'Product Beta', sales: '984', revenue: 'Rp 36.7M' },
     { id: 3, name: 'Product Gamma', sales: '842', revenue: 'Rp 29.4M' },

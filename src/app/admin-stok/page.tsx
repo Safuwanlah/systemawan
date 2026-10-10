@@ -257,7 +257,7 @@ export default function StandaloneAdminStok() {
                       <th className="px-6 py-4 font-semibold border-b border-border text-center">Aksi Cepat</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#292D32]">
+                  <tbody className="divide-y divide-border">
                     {filteredProducts.length > 0 ? filteredProducts.map((product) => {
                       const isLowStock = product.stock <= product.minStock;
                       return (
@@ -322,7 +322,7 @@ export default function StandaloneAdminStok() {
                 <History className="w-5 h-5 text-slate-400" />
                 <h3 className="font-semibold text-white">Log Aktivitas</h3>
               </div>
-              <div className="flex-1 overflow-y-auto divide-y divide-[#292D32]">
+              <div className="flex-1 overflow-y-auto divide-y divide-border">
                 {state.logs.length > 0 ? state.logs.map(log => (
                   <div key={log.id} className="p-4 flex items-center gap-3 hover:bg-[#141619]/50 transition-colors">
                     <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${

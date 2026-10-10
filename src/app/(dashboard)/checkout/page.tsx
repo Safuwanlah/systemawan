@@ -366,7 +366,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={handleCheckout}
                   disabled={checkoutState === "loading"}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-foreground font-semibold py-4 px-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-600/20 active:scale-[0.98]"
                 >
                   {checkoutState === "loading" ? (
                     <>
@@ -418,7 +418,7 @@ function PaymentOption({ id, icon, title, desc, selected, onSelect }: any) {
         {selected && <div className="w-2.5 h-2.5 rounded-full bg-blue-600" />}
       </div>
       <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors
-        ${selected ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
+        ${selected ? 'bg-blue-600 text-foreground' : 'bg-gray-100 text-gray-600 group-hover:bg-blue-100 group-hover:text-blue-600'}`}>
         {icon}
       </div>
       <div>
@@ -478,9 +478,9 @@ function SuccessView({ data, method, onCopy, format, total }: any) {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-3xl shadow-xl overflow-hidden text-center text-slate-900">
-        <div className="bg-green-500 p-8 flex flex-col items-center justify-center text-white">
+        <div className="bg-green-500 p-8 flex flex-col items-center justify-center text-foreground">
           <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-4">
-            <CheckCircle2 size={40} className="text-white" />
+            <CheckCircle2 size={40} className="text-foreground" />
           </div>
           <h1 className="text-2xl font-bold">Pesanan Berhasil!</h1>
           <p className="text-green-50 mt-2">Selesaikan pembayaran sesuai instruksi.</p>
@@ -523,7 +523,7 @@ function SuccessView({ data, method, onCopy, format, total }: any) {
           </div>
 
           <div className="space-y-3">
-            <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-all active:scale-[0.98]">
+            <button className="w-full bg-blue-600 hover:bg-blue-700 text-foreground font-semibold py-3.5 px-4 rounded-xl transition-all active:scale-[0.98]">
               Cek Status Pembayaran
             </button>
             <button className="w-full bg-white hover:bg-gray-50 text-gray-700 font-medium py-3.5 px-4 rounded-xl transition-all border border-gray-200">

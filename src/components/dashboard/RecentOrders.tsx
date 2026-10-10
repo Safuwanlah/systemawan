@@ -1,5 +1,14 @@
-export default function RecentOrders() {
-  const orders = [
+interface Order {
+  id: string;
+  customer: string;
+  product: string;
+  date: string;
+  status: string;
+  amount: string;
+}
+
+export default function RecentOrders({ data }: { data?: Order[] }) {
+  const orders = data || [
     { id: '#ORD-001', customer: 'John Doe', product: 'Product Alpha', date: '24 Oct 2026', status: 'Completed', amount: 'Rp 4.2M' },
     { id: '#ORD-002', customer: 'Jane Smith', product: 'Product Beta', date: '24 Oct 2026', status: 'Pending', amount: 'Rp 2.1M' },
     { id: '#ORD-003', customer: 'Michael Chen', product: 'Product Gamma', date: '23 Oct 2026', status: 'Completed', amount: 'Rp 5.4M' },

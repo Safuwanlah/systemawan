@@ -40,7 +40,7 @@ export default function SupplierPage() {
       <StaggerItem>
         {/* BREADCRUMB */}
         <div className="flex items-center text-sm text-muted-foreground mb-4">
-          <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
+          <Link href="/dashboard" className="hover:text-foreground transition-colors">Beranda</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
           <span className="text-foreground font-medium">Supplier</span>
         </div>
@@ -63,7 +63,7 @@ export default function SupplierPage() {
         <StaggerItem>
           <div className="bg-card border border-border rounded-xl p-4 shadow-lg h-full">
             <p className="text-xs font-medium text-muted-foreground mb-1">Total Supplier</p>
-            <p className="text-2xl font-black text-white">{stats.total}</p>
+            <p className="text-2xl font-black text-foreground">{stats.total}</p>
           </div>
         </StaggerItem>
         <StaggerItem>
@@ -100,7 +100,7 @@ export default function SupplierPage() {
                   key={tab}
                   onClick={() => setStatusFilter(tab)}
                   className={`px-4 py-1.5 text-sm font-bold rounded-md transition-colors ${
-                    statusFilter === tab ? 'bg-accent text-white shadow-sm' : 'text-muted-foreground hover:text-white'
+                    statusFilter === tab ? 'bg-accent text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
                   {tab}
@@ -112,10 +112,10 @@ export default function SupplierPage() {
           <div className="overflow-x-auto">
             {filteredSuppliers.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <Truck className="w-16 h-16 text-[#292D32] mb-4" />
-                <p className="text-white font-bold text-lg mb-1">Belum ada data</p>
+                <Truck className="w-16 h-16 text-muted-foreground/50 mb-4" />
+                <p className="text-foreground font-bold text-lg mb-1">Belum ada data</p>
                 <p className="text-muted-foreground text-sm mb-4">Belum ada supplier yang terdaftar atau sesuai pencarian.</p>
-                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-accent text-white text-sm rounded-md hover:bg-accent">+ Tambah Supplier</button>
+                <button onClick={() => { setEditingData(null); setIsModalOpen(true); }} className="px-4 py-2 bg-accent text-foreground text-sm rounded-md hover:bg-accent">+ Tambah Supplier</button>
               </div>
             ) : (
               <table className="w-full text-left text-sm whitespace-nowrap">
@@ -131,7 +131,7 @@ export default function SupplierPage() {
                     <th className="px-6 py-4 font-bold text-right">AKSI</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#292D32]">
+                <tbody className="divide-y divide-border">
                   <AnimatePresence mode="popLayout">
                     {filteredSuppliers.map(sp => {
                       const itemsCount = spareparts.filter(s => s.supplierId === sp.id).length;
@@ -146,11 +146,11 @@ export default function SupplierPage() {
                           className="hover:bg-accent/30 transition-colors group"
                         >
                           <td className="px-6 py-4 font-medium text-foreground">{sp.code}</td>
-                          <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                          <td className="px-6 py-4 font-bold text-foreground">{sp.name}</td>
                           <td className="px-6 py-4 text-muted-foreground">{sp.contact}</td>
                           <td className="px-6 py-4 text-muted-foreground">{sp.phone}</td>
                           <td className="px-6 py-4 text-muted-foreground">{sp.email}</td>
-                          <td className="px-6 py-4 text-center font-bold text-white">{itemsCount}</td>
+                          <td className="px-6 py-4 text-center font-bold text-foreground">{itemsCount}</td>
                           <td className="px-6 py-4 text-center">
                             <span className={`px-2.5 py-1 text-xs font-bold rounded ${sp.status === 'Aktif' ? 'bg-[#22C55E]/10 text-[#22C55E]' : 'bg-[#EF4444]/10 text-[#EF4444]'}`}>
                               {sp.status}
@@ -158,7 +158,7 @@ export default function SupplierPage() {
                           </td>
                           <td className="px-6 py-4 text-right">
                             <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button className="p-1.5 text-muted-foreground hover:text-white bg-accent rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
+                              <button className="p-1.5 text-muted-foreground hover:text-foreground bg-accent rounded transition-colors" title="Detail"><Eye className="w-4 h-4"/></button>
                               <button onClick={() => { setEditingData(sp); setIsModalOpen(true); }} className="p-1.5 text-muted-foreground hover:text-[#3B82F6] bg-accent rounded transition-colors" title="Edit"><Edit className="w-4 h-4"/></button>
                               <button onClick={() => { setSelectedId(sp.id); setIsDeleteModalOpen(true); }} className="p-1.5 text-muted-foreground hover:text-[#EF4444] bg-accent rounded transition-colors" title="Hapus"><Trash2 className="w-4 h-4"/></button>
                             </div>
@@ -194,37 +194,37 @@ export default function SupplierPage() {
               className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-lg overflow-hidden relative z-10"
             >
               <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-muted">
-                <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                   <Truck className="w-5 h-5 text-[#E53935]" />
                   {editingData ? 'Edit Supplier' : 'Tambah Supplier'}
                 </h2>
-                <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-muted-foreground hover:text-white transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
+                <button onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="text-muted-foreground hover:text-foreground transition-colors p-1 hover:bg-accent rounded-md"><X className="w-5 h-5"/></button>
               </div>
               <form onSubmit={(e) => { e.preventDefault(); setIsModalOpen(false); setEditingData(null); alert('Supplier disimpan (demo)'); }} className="p-6">
                 <div className="space-y-4 mb-4">
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Kode Supplier *</label>
-                    <input type="text" defaultValue={editingData?.code} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" defaultValue={editingData?.code} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Nama Supplier *</label>
-                    <input type="text" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" defaultValue={editingData?.name} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Kontak Person *</label>
-                    <input type="text" defaultValue={editingData?.contact} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" defaultValue={editingData?.contact} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Telepon *</label>
-                    <input type="text" defaultValue={editingData?.phone} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="text" defaultValue={editingData?.phone} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-muted-foreground mb-1">Email *</label>
-                    <input type="email" defaultValue={editingData?.email} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
+                    <input type="email" defaultValue={editingData?.email} required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground focus:outline-none focus:border-[#E53935] focus:ring-1 focus:ring-[#E53935] transition-all" />
                   </div>
                 </div>
                 <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-border">
-                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-muted-foreground hover:text-white font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
+                  <button type="button" onClick={() => { setIsModalOpen(false); setEditingData(null); }} className="px-4 py-2 text-muted-foreground hover:text-foreground font-medium transition-colors hover:bg-accent rounded-lg">Batal</button>
                   <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(229,57,53,0.25)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#171A1D] focus:ring-[#E53935]">Simpan Data</button>
                 </div>
               </form>

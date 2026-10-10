@@ -56,7 +56,7 @@ export default function StokPage() {
   return (
     <div className="space-y-6 animate-in fade-in">
       <div className="flex items-center text-sm text-muted-foreground">
-        <Link href="/dashboard" className="hover:text-white transition-colors">Beranda</Link>
+        <Link href="/dashboard" className="hover:text-foreground transition-colors">Beranda</Link>
         <ChevronRight className="w-4 h-4 mx-2" />
         <span className="text-foreground font-medium">Monitoring Stok</span>
       </div>
@@ -70,7 +70,7 @@ export default function StokPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-card border border-border rounded-xl p-4 shadow-lg cursor-pointer hover:border-[#3B82F6]/50 transition-colors" onClick={() => setStatusFilter('Semua')}>
           <p className="text-xs font-medium text-muted-foreground mb-1">Total Stok Item</p>
-          <p className="text-2xl font-black text-white">{stats.total}</p>
+          <p className="text-2xl font-black text-foreground">{stats.total}</p>
         </div>
         <div className="bg-card border border-border rounded-xl p-4 shadow-lg cursor-pointer hover:border-[#22C55E]/50 transition-colors" onClick={() => setStatusFilter('Aman')}>
           <p className="text-xs font-medium text-muted-foreground mb-1">Stok Aman</p>
@@ -104,7 +104,7 @@ export default function StokPage() {
                 key={tab}
                 onClick={() => setStatusFilter(tab)}
                 className={`px-4 py-1.5 text-sm font-bold rounded-md transition-colors ${
-                  statusFilter === tab ? 'bg-accent text-white shadow-sm' : 'text-muted-foreground hover:text-white'
+                  statusFilter === tab ? 'bg-accent text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {tab}
@@ -116,8 +116,8 @@ export default function StokPage() {
         <div className="overflow-x-auto">
           {filteredSpareparts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16">
-              <Package className="w-16 h-16 text-[#292D32] mb-4" />
-              <p className="text-white font-bold text-lg mb-1">Tidak ada data</p>
+              <Package className="w-16 h-16 text-muted-foreground/50 mb-4" />
+              <p className="text-foreground font-bold text-lg mb-1">Tidak ada data</p>
               <p className="text-muted-foreground text-sm mb-4">Sparepart dengan filter tersebut tidak ditemukan.</p>
             </div>
           ) : (
@@ -133,13 +133,13 @@ export default function StokPage() {
                   <th className="px-6 py-4 font-bold text-right">AKSI</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#292D32]">
+              <tbody className="divide-y divide-border">
                 {filteredSpareparts.map(sp => (
                   <tr key={sp.id} className="hover:bg-accent/30 transition-colors">
                     <td className="px-6 py-4 font-medium text-foreground">{sp.code}</td>
-                    <td className="px-6 py-4 font-bold text-white">{sp.name}</td>
+                    <td className="px-6 py-4 font-bold text-foreground">{sp.name}</td>
                     <td className="px-6 py-4 text-muted-foreground">{sp.category}</td>
-                    <td className="px-6 py-4 text-center font-black text-white">{sp.stock} <span className="text-xs text-muted-foreground font-normal">{sp.unit}</span></td>
+                    <td className="px-6 py-4 text-center font-black text-foreground">{sp.stock} <span className="text-xs text-muted-foreground font-normal">{sp.unit}</span></td>
                     <td className="px-6 py-4 text-center text-muted-foreground">{sp.minStock}</td>
                     <td className="px-6 py-4 text-center">
                       {sp.status === 'KOSONG' && <span className="px-2 py-1 bg-[#EF4444]/10 text-[#EF4444] rounded text-xs font-bold border border-[#EF4444]/20">KOSONG</span>}
@@ -166,16 +166,16 @@ export default function StokPage() {
         <div className="fixed inset-0 bg-muted/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-in fade-in">
           <div className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95">
             <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-muted">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <ArrowDownRight className="w-5 h-5 text-[#22C55E]" />
                 Form Stok Masuk (Restock)
               </h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-muted-foreground hover:text-white"><X className="w-5 h-5"/></button>
+              <button onClick={() => setIsModalOpen(false)} className="text-muted-foreground hover:text-foreground"><X className="w-5 h-5"/></button>
             </div>
             <form onSubmit={submitRestock} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">Sparepart *</label>
-                <select name="sparepartId" defaultValue={selectedSparepartId || ""} required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-white focus:border-[#E53935] outline-none">
+                <select name="sparepartId" defaultValue={selectedSparepartId || ""} required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-foreground focus:border-[#E53935] outline-none">
                   <option value="" disabled>Pilih Sparepart...</option>
                   {spareparts.map(s => <option key={s.id} value={s.id}>{s.code} - {s.name}</option>)}
                 </select>
@@ -183,19 +183,19 @@ export default function StokPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Jumlah Masuk *</label>
-                  <input type="number" name="quantity" min="1" required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-white focus:border-[#E53935] outline-none" />
+                  <input type="number" name="quantity" min="1" required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-foreground focus:border-[#E53935] outline-none" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Tanggal *</label>
-                  <input type="date" name="date" defaultValue={new Date().toISOString().split('T')[0]} required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-white focus:border-[#E53935] outline-none" />
+                  <input type="date" name="date" defaultValue={new Date().toISOString().split('T')[0]} required className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-foreground focus:border-[#E53935] outline-none" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">No. Referensi (PO/Faktur)</label>
-                <input type="text" name="reference" placeholder="Opsional" className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-white focus:border-[#E53935] outline-none" />
+                <input type="text" name="reference" placeholder="Opsional" className="w-full bg-muted border border-border rounded-lg px-4 py-2.5 text-foreground focus:border-[#E53935] outline-none" />
               </div>
               <div className="flex gap-3 justify-end pt-4 mt-6 border-t border-border">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-muted-foreground hover:text-white font-medium">Batal</button>
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 text-muted-foreground hover:text-foreground font-medium">Batal</button>
                 <button type="submit" className="px-6 py-2 bg-[#E53935] hover:bg-[#D32F2F] text-white font-bold rounded-lg transition-colors shadow-lg shadow-[#E53935]/20">Simpan Stok Masuk</button>
               </div>
             </form>

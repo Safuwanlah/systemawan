@@ -119,7 +119,7 @@ export default function CategoriesPage() {
             <button 
               type="submit" 
               disabled={loading || !newCategoryName.trim()}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center"
+              className="px-4 py-2 bg-blue-600 text-foreground rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors flex items-center"
             >
               <Plus className="w-4 h-4 mr-1" /> Tambah
             </button>
@@ -166,7 +166,7 @@ export default function CategoriesPage() {
             <button 
               type="submit" 
               disabled={loading || !newBrandName.trim()}
-              className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50 transition-colors flex items-center"
+              className="px-4 py-2 bg-amber-600 text-foreground rounded-lg hover:bg-amber-700 disabled:opacity-50 transition-colors flex items-center"
             >
               <Plus className="w-4 h-4 mr-1" /> Tambah
             </button>

@@ -2,22 +2,26 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Jan', value: 450 },
-  { name: 'Feb', value: 680 },
-  { name: 'Mar', value: 550 },
-  { name: 'Apr', value: 620 },
-  { name: 'May', value: 780 },
-  { name: 'Jun', value: 600 },
-  { name: 'Jul', value: 580 },
-  { name: 'Aug', value: 700 },
-  { name: 'Sep', value: 900 },
-  { name: 'Oct', value: 850 },
-  { name: 'Nov', value: 880 },
-  { name: 'Dec', value: 920 },
-];
+interface ChartData {
+  name: string;
+  value: number;
+}
 
-export default function OrdersChart() {
+export default function OrdersChart({ data: propData }: { data?: ChartData[] }) {
+  const data = propData || [
+    { name: 'Jan', value: 450 },
+    { name: 'Feb', value: 680 },
+    { name: 'Mar', value: 550 },
+    { name: 'Apr', value: 620 },
+    { name: 'May', value: 780 },
+    { name: 'Jun', value: 600 },
+    { name: 'Jul', value: 580 },
+    { name: 'Aug', value: 700 },
+    { name: 'Sep', value: 900 },
+    { name: 'Oct', value: 850 },
+    { name: 'Nov', value: 880 },
+    { name: 'Dec', value: 920 },
+  ];
   return (
     <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">

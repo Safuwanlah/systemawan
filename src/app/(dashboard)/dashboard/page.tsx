@@ -18,10 +18,25 @@ export default async function Dashboard() {
     prisma.sparepart.count()
   ]);
 
-  const currentYear = new Date().getFullYear();
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth();
+  
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const revenueData = months.map(m => ({ name: m, value: 0 }));
-  const ordersData = months.map(m => ({ name: m, value: 0 }));
+  const revenueYearly = months.map(m => ({ name: m, value: 0 }));
+  const ordersYearly = months.map(m => ({ name: m, value: 0 }));
+
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const revenueMonthly = Array.from({length: daysInMonth}, (_, i) => ({ name: `${i+1}`, value: 0 }));
+  const ordersMonthly = Array.from({length: daysInMonth}, (_, i) => ({ name: `${i+1}`, value: 0 }));
+
+  const weeklyDates = Array.from({length: 7}, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (6 - i));
+    return d;
+  });
+  const revenueWeekly = weeklyDates.map(d => ({ name: d.toLocaleDateString('id-ID', { weekday: 'short' }), value: 0 }));
+  const ordersWeekly = weeklyDates.map(d => ({ name: d.toLocaleDateString('id-ID', { weekday: 'short' }), value: 0 }));
 
   let totalIncome = 0;
   let totalExpense = 0;
@@ -40,21 +55,45 @@ export default async function Dashboard() {
     }
 
     const d = new Date(t.date);
+    
+    // Yearly
     if (d.getFullYear() === currentYear) {
-      const monthIndex = d.getMonth();
-      if (t.type === 'KELUAR') {
-        revenueData[monthIndex].value += total;
-      }
-      ordersData[monthIndex].value += t.quantity;
+      if (t.type === 'KELUAR') revenueYearly[d.getMonth()].value += total;
+      ordersYearly[d.getMonth()].value += t.quantity;
     }
+    
+    // Monthly (current month)
+    if (d.getFullYear() === currentYear && d.getMonth() === currentMonth) {
+      const dayIdx = d.getDate() - 1;
+      if (t.type === 'KELUAR') revenueMonthly[dayIdx].value += total;
+      ordersMonthly[dayIdx].value += t.quantity;
+    }
+    
+    // Weekly (last 7 days)
+    const dTime = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    weeklyDates.forEach((wd, idx) => {
+      if (new Date(wd.getFullYear(), wd.getMonth(), wd.getDate()).getTime() === dTime) {
+        if (t.type === 'KELUAR') revenueWeekly[idx].value += total;
+        ordersWeekly[idx].value += t.quantity;
+      }
+    });
   });
 
   const newOrders = allTransactions.length;
 
-  const scaledRevenueData = revenueData.map(d => ({
-    ...d,
-    value: Math.round(d.value / 1000000)
-  }));
+  const scaleToMillions = (arr: {name: string, value: number}[]) => arr.map(d => ({...d, value: Math.round(d.value / 1000000)}));
+  
+  const revenueDataObj = {
+    Yearly: scaleToMillions(revenueYearly),
+    Monthly: scaleToMillions(revenueMonthly),
+    Weekly: scaleToMillions(revenueWeekly)
+  };
+  
+  const ordersDataObj = {
+    Yearly: ordersYearly,
+    Monthly: ordersMonthly,
+    Weekly: ordersWeekly
+  };
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
@@ -170,10 +209,10 @@ export default async function Dashboard() {
       {/* Analytics Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <StaggerItem className="min-w-0">
-          <RevenueChart data={scaledRevenueData} totalValue={formatCurrency(totalIncome)} />
+          <RevenueChart data={revenueDataObj} totalValue={formatCurrency(totalIncome)} />
         </StaggerItem>
         <StaggerItem className="min-w-0">
-          <OrdersChart data={ordersData} />
+          <OrdersChart data={ordersDataObj} />
         </StaggerItem>
       </div>
 

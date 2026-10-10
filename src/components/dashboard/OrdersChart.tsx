@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface ChartData {
@@ -7,8 +8,15 @@ interface ChartData {
   value: number;
 }
 
-export default function OrdersChart({ data: propData }: { data?: ChartData[] }) {
-  const data = propData || [
+interface DataProps {
+  Yearly: ChartData[];
+  Monthly: ChartData[];
+  Weekly: ChartData[];
+}
+
+export default function OrdersChart({ data: propData }: { data?: DataProps }) {
+  const [filter, setFilter] = useState<'Yearly' | 'Monthly' | 'Weekly'>('Yearly');
+  const data = propData ? propData[filter] : [
     { name: 'Jan', value: 450 },
     { name: 'Feb', value: 680 },
     { name: 'Mar', value: 550 },
@@ -26,12 +34,16 @@ export default function OrdersChart({ data: propData }: { data?: ChartData[] }) 
     <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-foreground font-semibold text-[16px]">Sales/Revenue</h3>
+          <h3 className="text-foreground font-semibold text-[16px]">Sales/Revenue ({filter})</h3>
         </div>
-        <select className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
-          <option>Yearly</option>
-          <option>Monthly</option>
-          <option>Weekly</option>
+        <select 
+          value={filter}
+          onChange={(e) => setFilter(e.target.value as any)}
+          className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer"
+        >
+          <option value="Yearly">Yearly</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Weekly">Weekly</option>
         </select>
       </div>
 

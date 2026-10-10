@@ -36,7 +36,7 @@ export default function LoginPage() {
           <div className="w-10 h-10 rounded bg-card border border-[#25292D] flex items-center justify-center shadow-inner group-hover:border-[#E53935]/50 transition-colors">
             <Wrench className="w-5 h-5 text-[#E53935]" />
           </div>
-          <span className="font-bold text-lg tracking-wide text-white">GARASI INVENTORY</span>
+          <span className="font-bold text-lg tracking-wide text-foreground">GARASI INVENTORY</span>
         </Link>
       </header>
 
@@ -50,14 +50,14 @@ export default function LoginPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-[#E53935] to-transparent opacity-50"></div>
 
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-white mb-2">MASUK KE GARASI INVENTORY</h1>
+            <h1 className="text-2xl font-bold text-foreground mb-2">MASUK KE GARASI INVENTORY</h1>
             <p className="text-muted-foreground text-sm font-medium">Kelola Bengkel Lebih Mudah</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Username/Email Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white block">Username atau Email</label>
+              <label className="text-sm font-medium text-foreground block">Username atau Email</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-[#5A6068]" />
@@ -67,7 +67,7 @@ export default function LoginPage() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="block w-full pl-10 pr-4 py-3 bg-muted border border-[#25292D] rounded-lg text-white placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
+                  className="block w-full pl-10 pr-4 py-3 bg-muted border border-[#25292D] rounded-lg text-foreground placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
                   placeholder="Contoh: admin"
                 />
               </div>
@@ -75,7 +75,7 @@ export default function LoginPage() {
 
             {/* Password Field */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-white block">Kata Sandi</label>
+              <label className="text-sm font-medium text-foreground block">Kata Sandi</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-[#5A6068]" />
@@ -85,7 +85,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-10 py-3 bg-muted border border-[#25292D] rounded-lg text-white placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
+                  className="block w-full pl-10 pr-10 py-3 bg-muted border border-[#25292D] rounded-lg text-foreground placeholder-[#5A6068] focus:outline-none focus:ring-1 focus:ring-[#E53935] focus:border-[#E53935] transition-all text-sm"
                   placeholder="••••••••"
                 />
                 <button
@@ -100,7 +100,7 @@ export default function LoginPage() {
 
             {/* Forgot Password Link */}
             <div className="flex justify-end pt-1">
-              <a href="#" className="text-xs font-medium text-muted-foreground hover:text-white transition-colors">
+              <a href="#" className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
                 Lupa Kata Sandi?
               </a>
             </div>

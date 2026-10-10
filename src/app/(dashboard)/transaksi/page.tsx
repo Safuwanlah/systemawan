@@ -227,8 +227,8 @@ export default function TransaksiPage() {
                 </div>
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Sparepart *</label>
-                  <select name="sparepartId" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground outline-none focus:border-[#E53935]">
-                    <option value="" disabled selected>Pilih Sparepart...</option>
+                  <select name="sparepartId" required defaultValue="" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground outline-none focus:border-[#E53935]">
+                    <option value="" disabled>Pilih Sparepart...</option>
                     {spareparts.map(s => <option key={s.id} value={s.id}>{s.code} - {s.name}</option>)}
                   </select>
                 </div>
@@ -281,8 +281,8 @@ export default function TransaksiPage() {
                 </div>
                 <div className="col-span-2">
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Sparepart *</label>
-                  <select name="sparepartId" required className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground outline-none focus:border-[#E53935]">
-                    <option value="" disabled selected>Pilih Sparepart...</option>
+                  <select name="sparepartId" required defaultValue="" className="w-full bg-muted border border-border rounded-lg px-4 py-2 text-foreground outline-none focus:border-[#E53935]">
+                    <option value="" disabled>Pilih Sparepart...</option>
                     {spareparts.filter(s => s.stock > 0).map(s => <option key={s.id} value={s.id}>{s.code} - {s.name} (Stok: {s.stock})</option>)}
                   </select>
                 </div>

@@ -20,7 +20,7 @@ export default function Header({ isSidebarOpen, setIsSidebarOpen }: HeaderProps)
   const unreadNotifs = notifications.filter(n => !n.read);
 
   return (
-    <header className="h-[72px] px-4 md:px-8 bg-background border-b border-border flex items-center justify-between sticky top-0 z-40">
+    <header className="h-[72px] px-4 md:px-8 bg-white dark:bg-card border-b border-border flex items-center justify-between sticky top-0 z-40">
       
       <div className="flex items-center gap-4">
         {/* Mobile & Desktop Sidebar Toggle */}

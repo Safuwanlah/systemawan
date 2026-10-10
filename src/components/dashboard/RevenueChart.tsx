@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface ChartData {
@@ -7,8 +8,15 @@ interface ChartData {
   value: number;
 }
 
-export default function RevenueChart({ data: propData, totalValue = '$245,479' }: { data?: ChartData[], totalValue?: string }) {
-  const data = propData || [
+interface DataProps {
+  Yearly: ChartData[];
+  Monthly: ChartData[];
+  Weekly: ChartData[];
+}
+
+export default function RevenueChart({ data: propData, totalValue = '$245,479' }: { data?: DataProps, totalValue?: string }) {
+  const [filter, setFilter] = useState<'Yearly' | 'Monthly' | 'Weekly'>('Yearly');
+  const data = propData ? propData[filter] : [
     { name: 'Jan', value: 185 },
     { name: 'Feb', value: 210 },
     { name: 'Mar', value: 198 },
@@ -26,13 +34,17 @@ export default function RevenueChart({ data: propData, totalValue = '$245,479' }
     <div className="bg-accent border border-border rounded-xl p-6 shadow-sm flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-foreground font-semibold text-[16px]">Yearly Stats</h3>
+          <h3 className="text-foreground font-semibold text-[16px]">{filter === 'Yearly' ? 'Yearly' : filter === 'Monthly' ? 'This Month' : 'Last 7 Days'} Stats</h3>
           <p className="text-[24px] font-bold text-foreground mt-1">{totalValue}</p>
         </div>
-        <select className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer">
-          <option>Yearly</option>
-          <option>Monthly</option>
-          <option>Weekly</option>
+        <select 
+          value={filter}
+          onChange={(e) => setFilter(e.target.value as any)}
+          className="bg-card border border-border text-muted-foreground text-[13px] rounded-md px-3 py-1.5 outline-none focus:border-[#3867FF] cursor-pointer"
+        >
+          <option value="Yearly">Yearly</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Weekly">Weekly</option>
         </select>
       </div>
 

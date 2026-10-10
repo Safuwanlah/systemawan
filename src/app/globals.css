@@ -4,19 +4,19 @@
 
 :root {
   /* Colors */
-  --background: #f8fafc;
+  --background: #e2e8f0; /* Darker slate-200 */
   --foreground: #0f172a;
   
-  --card: #ffffff;
+  --card: #f8fafc;
   --card-foreground: #0f172a;
 
-  --border: #e2e8f0;
+  --border: #cbd5e1; /* Darker slate-300 to remain visible */
   --chart-grid: #f1f5f9;
   
-  --muted: #f1f5f9;
+  --muted: #f8fafc;
   --muted-foreground: #475569;
   
-  --accent: #f1f5f9;
+  --accent: #ffffff;
   --accent-foreground: #0f172a;
   
   --primary: #3867FF;

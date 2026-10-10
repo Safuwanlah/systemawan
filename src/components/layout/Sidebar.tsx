@@ -48,15 +48,13 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
   return (
     <>
       <aside 
-        className={`fixed lg:relative h-full bg-card border-border flex flex-col shrink-0 transition-[width,transform,border-width] ease-in-out duration-300 z-50 ${
-          isSidebarOpen ? 'w-[260px] translate-x-0 border-r' : 'w-0 -translate-x-full lg:translate-x-0 border-r-0 overflow-hidden'
+        className={`fixed lg:relative h-full w-[260px] bg-card border-border flex flex-col shrink-0 transition-all ease-[cubic-bezier(0.22,1,0.36,1)] duration-500 z-50 ${
+          isSidebarOpen ? 'translate-x-0 ml-0 border-r' : '-translate-x-full lg:ml-[-260px] border-r-0'
         }`}
       >
         {/* Brand & Toggle */}
-        <div className={`h-[72px] flex items-center border-b border-border overflow-hidden shrink-0 transition-all duration-300 ${
-          isSidebarOpen ? 'px-5 justify-start' : 'px-0 justify-center'
-        }`}>
-          <div className={`flex items-center transition-all duration-300 ${isSidebarOpen ? 'gap-3' : 'gap-0'}`}>
+        <div className="h-[72px] px-5 flex items-center justify-start border-b border-border shrink-0">
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent transition-all duration-200 shrink-0"
@@ -64,28 +62,22 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
             >
               <Menu className="w-6 h-6" />
             </button>
-            {isSidebarOpen && (
-              <span className={`font-bold text-foreground text-[16px] tracking-wide whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out opacity-100 translate-x-0 max-w-[150px]`}>
-                System Awan
-              </span>
-            )}
+            <span className="font-bold text-foreground text-[16px] tracking-wide whitespace-nowrap">
+              System Awan
+            </span>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className={`flex-1 py-6 px-4 space-y-1.5 overflow-y-auto overflow-x-hidden ${!isSidebarOpen ? 'hidden' : ''}`}>
+        <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto overflow-x-hidden">
           {menuItems.map((item) => {
-            // Using precise path matching or starting path for active state
             const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path + '/'));
             return (
               <Link
                 key={item.name}
                 href={item.path}
                 onClick={(e) => handleNavClick(e, item.path)}
-                title={!isSidebarOpen ? item.name : ''}
-                className={`relative flex items-center py-3 rounded-xl text-[14px] font-medium transition-colors duration-200 group z-10 ${
-                  isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
-                } ${
+                className={`relative flex items-center py-3 px-4 gap-3.5 rounded-xl text-[14px] font-medium transition-colors duration-200 group z-10 ${
                   isActive 
                     ? 'text-primary-foreground' 
                     : 'text-muted-foreground hover:text-foreground hover:bg-accent'
@@ -99,9 +91,7 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
                   />
                 )}
                 <item.icon className={`w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground group-hover:text-foreground'}`} />
-                <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
-                  isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
-                }`}>
+                <span className="whitespace-nowrap">
                   {item.name}
                 </span>
               </Link>
@@ -110,18 +100,13 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }: SidebarProp
         </nav>
 
         {/* Logout Action */}
-        <div className={`p-4 border-t border-border shrink-0 ${!isSidebarOpen ? 'hidden' : ''}`}>
+        <div className="p-4 border-t border-border shrink-0">
           <button
             onClick={() => setIsLogoutModalOpen(true)}
-            title={!isSidebarOpen ? "Logout" : ""}
-            className={`w-full flex items-center py-3 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
-              isSidebarOpen ? 'px-4 gap-3.5' : 'px-0 justify-center gap-0'
-            } text-muted-foreground hover:bg-[#FF4D67]/10 hover:text-[#FF4D67]`}
+            className="w-full flex items-center py-3 px-4 gap-3.5 rounded-xl text-[14px] font-medium transition-all duration-200 group text-muted-foreground hover:bg-[#FF4D67]/10 hover:text-[#FF4D67]"
           >
             <LogOut className="w-[20px] h-[20px] shrink-0 transition-transform duration-200 group-hover:scale-110" />
-            <span className={`whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
-              isSidebarOpen ? 'opacity-100 translate-x-0 max-w-[150px]' : 'opacity-0 -translate-x-4 max-w-0'
-            }`}>
+            <span className="whitespace-nowrap">
               Logout
             </span>
           </button>

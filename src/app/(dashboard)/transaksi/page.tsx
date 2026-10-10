@@ -36,11 +36,11 @@ export default function TransaksiPage() {
     nilai: transactions.reduce((acc, t) => acc + t.harga, 0),
   };
 
-  const handleMasukSubmit = (e: React.FormEvent) => {
+  const handleMasukSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const sp = spareparts.find(s => s.id === formData.get('sparepartId'));
-    addStockIn({
+    await addStockIn({
       date: formData.get('date') as string,
       sparepartId: formData.get('sparepartId') as string,
       quantity: parseInt(formData.get('quantity') as string),
@@ -53,11 +53,11 @@ export default function TransaksiPage() {
     setIsMasukOpen(false);
   };
 
-  const handleKeluarSubmit = (e: React.FormEvent) => {
+  const handleKeluarSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const sp = spareparts.find(s => s.id === formData.get('sparepartId'));
-    const success = addStockOut({
+    const success = await addStockOut({
       date: formData.get('date') as string,
       sparepartId: formData.get('sparepartId') as string,
       quantity: parseInt(formData.get('quantity') as string),
